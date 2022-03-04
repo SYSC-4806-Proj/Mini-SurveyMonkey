@@ -1,7 +1,6 @@
 # Mini-SurveyMonkey
 
-- [Mini-SurveyMonkey](#mini-surveymonkey)
-  * [Content](#content)
+- Content
   * [Background](#background)
   * [Install](#install)
   * [Usage](#usage)
