@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Answer implements Question{
+    //open ended questions
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

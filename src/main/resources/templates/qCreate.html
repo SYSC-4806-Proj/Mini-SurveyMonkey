@@ -3,8 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Questionnaire Create</title>
+    <script>
+        var count = 0;
+
+        function addFields(){
+            count ++;
+            var newFields = document.getElementById('answer').cloneNode(true);
+            // newFields.id = count;
+            // newFields.style.display = 'block';
+            var newField = newFields.childNodes;
+            for(var i=0; i<newField.length; i++){
+                var theName = newField[i].name;
+                if(theName){
+                    newField[i].name = theName + count;
+                }
+            }
+            var insertHere = document.getElementById("addQuestion");
+            insertHere.parentNode.insertBefore(newFields, insertHere);
+        }
+    </script>
 </head>
 <body>
+    <div id="questionnaire">
+        <form method="post" action="">
+            <div id="answer">
+                <label>
+                    <textarea rows="5" cols="20" name="content">Question Content</textarea>
+                </label>
+            </div>
+            <span id="addQuestion"></span>
+            <input type="submit" value="Create"/>
+        </form>
+        <button id="field_add" onclick="addFields()">Add New Question</button>
+    </div>
 
 </body>
 </html>
