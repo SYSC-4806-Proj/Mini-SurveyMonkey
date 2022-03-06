@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Answer implements Question{
+public class OpenEnd implements Question{
     //open ended questions
 
     @Id
@@ -16,7 +16,7 @@ public class Answer implements Question{
     private String content;
     private String answer;
 
-    public Answer(){
+    public OpenEnd(){
 
     }
 

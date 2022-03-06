@@ -12,7 +12,7 @@ public class Questionnaire {
     private long id;
 
     @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    private List<Answer> questionList = new ArrayList<Answer>();
+    private List<OpenEnd> questionList = new ArrayList<OpenEnd>();
 
     public Questionnaire(){
 
@@ -22,11 +22,15 @@ public class Questionnaire {
         return id;
     }
 
-    public void setQuestionList(ArrayList<Answer> questionList){
+    public void setQuestionList(ArrayList<OpenEnd> questionList){
         this.questionList = questionList;
     }
 
-    public List<Answer> getQuestionList(){
+    public List<OpenEnd> getQuestionList(){
         return questionList;
+    }
+
+    public void addQuestion(OpenEnd question){
+        questionList.add(question);
     }
 }
