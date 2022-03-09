@@ -1,42 +1,63 @@
 package Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * The type Open end questions.
+ */
 @Entity
-public class OpenEnd implements Question{
-    //open ended questions
+@Table(name = "open_end")
+public class OpenEnd extends Question{
+    //open-ended questions
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @ElementCollection
+    @Column(name = "answer")
+    private List<String> answers = new ArrayList<>();
 
-    private String content;
-    private String answer;
-
+    /**
+     * Instantiates a new Open end.
+     */
     public OpenEnd(){
-
+        super();
     }
 
-    public long getId(){
-        return id;
+    /**
+     * Instantiates a new Open end.
+     *
+     * @param question the question
+     * @param answer   the answer
+     */
+    public OpenEnd(String question, List<String> answer) {
+        super(question);
+        this.answers = answer;
     }
 
-    public void setContent(String content){
-        this.content=content;
+    /**
+     * Set answer.
+     *
+     * @param answer the answer
+     */
+    public void setAnswer(ArrayList<String> answer){
+        this.answers = answer;
     }
 
-    public String getContent(){
-        return this.content;
+    /**
+     * Get answer list.
+     *
+     * @return the list
+     */
+    public List<String> getAnswer(){
+        return answers;
     }
 
-    public void setAnswer(String answer){
-        this.answer = answer;
-    }
-
-    public String getAnswer(){
-        return answer;
+    /**
+     * Add answer.
+     *
+     * @param answer the answer
+     */
+    public void addAnswer(String answer){
+        this.answers.add(answer);
     }
 }
