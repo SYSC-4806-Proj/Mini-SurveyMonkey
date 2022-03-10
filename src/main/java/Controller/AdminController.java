@@ -36,7 +36,7 @@ public class AdminController {
         for(List<String> value: formData.values()){
                 for(String content: value){
                     OpenEnd q = new OpenEnd();
-                    q.setContent(content);
+                    q.setQuestion(content);
                     questionnaire.addQuestion(q);
                     System.out.println(content);
                 }

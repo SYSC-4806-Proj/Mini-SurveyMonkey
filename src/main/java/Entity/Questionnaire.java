@@ -15,6 +15,8 @@ public class Questionnaire {
 
     private String name;
 
+    //user id connect
+
     private boolean isClosed;
 
     @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
