@@ -59,7 +59,7 @@ public class Questionnaire {
         this.questionList = questionList;
     }
 
-    public void addQuestion(OpenEnd question){
+    public void addQuestion(Question question){
         questionList.add(question);
     }
 }

@@ -1,9 +1,8 @@
 package Controller;
 
-import Entity.OpenEnd;
-import Entity.Question;
-import Entity.Questionnaire;
+import Entity.*;
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -12,9 +11,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.swing.text.html.parser.Entity;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -35,7 +37,7 @@ public class AdminController {
 
         for(List<String> value: formData.values()){
                 for(String content: value){
-                    OpenEnd q = new OpenEnd();
+                    Range q = new Range();
                     q.setQuestion(content);
                     questionnaire.addQuestion(q);
                     System.out.println(content);
@@ -55,6 +57,21 @@ public class AdminController {
             return "qCreate";
         }
         model.addAttribute("questionnaire", questionnaire);
+        List<Long> openEndIdList = new ArrayList<>();
+        List<Long> rangeIdList = new ArrayList<>();
+        List<Long> selectionIdList = new ArrayList<>();
+        for(Question question:questionnaire.getQuestionList()){
+            if(question instanceof OpenEnd){
+                openEndIdList.add(question.getId());
+            }else if(question instanceof Range){
+                rangeIdList.add(question.getId());
+            }else if(question instanceof Selection){
+                selectionIdList.add(question.getId());
+            }
+        }
+        model.addAttribute("openEndList",openEndIdList);
+        model.addAttribute("rangeList", rangeIdList);
+        model.addAttribute("selectionList", selectionIdList);
         return "qView";
     }
 

@@ -13,6 +13,10 @@ import java.util.List;
 @Entity
 @Table(name = "range")
 public class Range extends Question{
+
+    @Column(name = "min_boundary")
+    private int minBoundary;
+
     @Column(name = "max_boundary")
     private int maxBoundary;
 
@@ -35,6 +39,24 @@ public class Range extends Question{
     public Range(int maxBoundary){
         super();
         this.maxBoundary = maxBoundary;
+    }
+
+    /**
+     * Gets min boundary.
+     *
+     * @return the min boundary
+     */
+    public int getMinBoundary() {
+        return minBoundary;
+    }
+
+    /**
+     * Sets min boundary.
+     *
+     * @param minBoundary the min boundary
+     */
+    public void setMinBoundary(int minBoundary) {
+        this.minBoundary = minBoundary;
     }
 
     /**
@@ -81,4 +103,5 @@ public class Range extends Question{
     public void addAnswer(Integer answer){
         this.answers.add(answer);
     }
+
 }
