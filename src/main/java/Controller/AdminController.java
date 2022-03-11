@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.swing.text.html.parser.Entity;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -50,7 +47,7 @@ public class AdminController {
         return "redirect:/view/" + id;
     }
 
-    @RequestMapping(path="/view/{id}", method = RequestMethod.GET)
+    @GetMapping("/view/{id}")
     public String viewQuestionnaire(@PathVariable long id, Model model){
         Questionnaire questionnaire = this.questionnaireRepo.findById(id);
         if (questionnaire == null){

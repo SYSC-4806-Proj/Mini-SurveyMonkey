@@ -36,8 +36,9 @@ public class Range extends Question{
      *
      * @param maxBoundary the max boundary
      */
-    public Range(int maxBoundary){
-        super();
+    public Range(String question, int minBoundary, int maxBoundary){
+        super(question);
+        this.minBoundary = minBoundary;
         this.maxBoundary = maxBoundary;
     }
 

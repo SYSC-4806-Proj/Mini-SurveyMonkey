@@ -26,12 +26,10 @@ public class OpenEnd extends Question{
     /**
      * Instantiates a new Open end.
      *
-     * @param question the question
-     * @param answer   the answer
+     * @param question the question\
      */
-    public OpenEnd(String question, List<String> answer) {
+    public OpenEnd(String question) {
         super(question);
-        this.answers = answer;
     }
 
     /**
