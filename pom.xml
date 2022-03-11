@@ -69,7 +69,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>ServingWebContentApplication</mainClass>
+                    <mainClass>${spring.boot.mainclass}</mainClass>
                 </configuration>
             </plugin>
         </plugins>
