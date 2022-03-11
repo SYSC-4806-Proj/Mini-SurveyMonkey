@@ -31,10 +31,11 @@ public class Selection extends Question{
     /**
      * Instantiates a new Selection question.
      *
-     * @param options the options
+     * @param question the question
+     * @param options  the options
      */
-    public Selection(List<String> options){
-        super();
+    public Selection(String question, List<String> options){
+        super(question);
         this.options = options;
     }
 
@@ -72,5 +73,24 @@ public class Selection extends Question{
      */
     public void setAnswers(List<String> answers) {
         this.answers = answers;
+    }
+
+    /**
+     * Add answer to answers
+     *
+     * @param answer the new answer
+     */
+    public void addAnswer(String answer){
+        this.answers.add(answer);
+    }
+
+    /**
+     * Add option.
+     *
+     * @param option the option
+     */
+    public void addOption(String option){
+        if(this.options.contains(option)) return;
+        this.options.add(option);
     }
 }
