@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/*.jar -Dspring.profiles.active=prod
+web java -Dserver.port=$PORT $JAVA_OPTS -jar target/Mini-SurveyMonkey-1.0-SNAPSHOT.jar
