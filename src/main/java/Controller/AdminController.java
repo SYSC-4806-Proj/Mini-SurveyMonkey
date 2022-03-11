@@ -104,8 +104,6 @@ public class AdminController {
 
     }
 
-    
-
     //@RequestMapping(path="/create", method = RequestMethod.GET)
     //public String chooseQuestionType(){
 
