@@ -29,22 +29,22 @@ public class AdminController {
         return "qCreate";
     }
 
-    /*@RequestMapping(path="create", method = RequestMethod.POST)
-    public String questionnaireCreate(@RequestBody MultiValueMap<String, String> formData){
-        Questionnaire questionnaire = new Questionnaire();
-
-        for(List<String> value: formData.values()){
-                for(String content: value){
-                    Range q = new Range();
-                    q.setQuestion(content);
-                    questionnaire.addQuestion(q);
-                    System.out.println(content);
-                }
-        }
-        questionnaireRepo.save(questionnaire);
-        long id = questionnaire.getId();
-        return "redirect:/view/" + id;
-    }
+//    @RequestMapping(path="create", method = RequestMethod.POST)
+//    public String questionnaireCreate(@RequestBody MultiValueMap<String, String> formData){
+//        Questionnaire questionnaire = new Questionnaire();
+//
+//        for(List<String> value: formData.values()){
+//                for(String content: value){
+//                    Range q = new Range();
+//                    q.setQuestion(content);
+//                    questionnaire.addQuestion(q);
+//                    System.out.println(content);
+//                }
+//        }
+//        questionnaireRepo.save(questionnaire);
+//        long id = questionnaire.getId();
+//        return "redirect:/view/" + id;
+//    }
 
 
     @GetMapping("/view/{id}")
