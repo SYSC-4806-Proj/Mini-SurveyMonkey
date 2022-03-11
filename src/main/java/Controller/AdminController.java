@@ -78,31 +78,42 @@ public class AdminController {
         Map<String, String[]> formData = request.getParameterMap();
 
         for (Map.Entry<String, String[]> entry : formData.entrySet()) {
-            for (String content : entry.getValue()) {
-                if (entry.getKey().equals("open_end_question")){
+            if (entry.getKey().equals("open_end_question")) {
+                for (String question : entry.getValue()) {
                     OpenEnd q = new OpenEnd();
-                    q.setQuestion(content);
-                    questionnaire.addQuestion(q);
-
-                } else if(entry.getKey().equals("range_question")){
-                    Range q = new Range();
-                    q.setQuestion(content);
-                    questionnaire.addQuestion(q);
-
-                } else if(entry.getKey().equals("selection_question")){
-                    Selection q = new Selection();
-                    q.setQuestion(content);
+                    q.setQuestion(question);
                     questionnaire.addQuestion(q);
 
                 }
             }
-        }
+            else if(entry.getKey().equals("range_question")) {
+                   String[] question_content = entry.getValue().clone();
+                   for (int i = 0; i< question_content.length;i = i+3 ){
+                      Range q = new Range(question_content[i], Integer. valueOf(question_content[i+1]),Integer. valueOf(question_content[i+2]));
+                      questionnaire.addQuestion(q);
+                   }
+                }
 
+            else if(entry.getKey().equals("selection_question")){
+                String[] question_content = entry.getValue().clone();
+
+                for (int i = 0;i < question_content.length;i=i+2){
+                    String[] list = question_content[i+1].split(",");
+                    List<String> l = Arrays.asList(list);
+                    Selection q = new Selection(question_content[i],l);
+                    questionnaire.addQuestion(q);
+                }
+
+                }
+            }
         questionnaireRepo.save(questionnaire);
         long id = questionnaire.getId();
         return "redirect:/view/" + id;
+        }
 
-    }
+
+
+
 
     //@RequestMapping(path="/create", method = RequestMethod.GET)
     //public String chooseQuestionType(){
