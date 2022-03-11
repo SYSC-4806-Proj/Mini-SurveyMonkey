@@ -15,6 +15,15 @@
     <artifactId>Mini-SurveyMonkey</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <profiles>
+        <profile>
+            <id>profile1</id>
+            <properties>
+                <spring.boot.mainclass>Controller.ServingWebContentApplication</spring.boot.mainclass>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -68,9 +77,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>${spring.boot.mainclass}</mainClass>
-                </configuration>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <mainClass>${spring.boot.mainclass}</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
