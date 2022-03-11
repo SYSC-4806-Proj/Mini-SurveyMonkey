@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Questionnaire Create</title>
+    <script>
+        function addFields(){
+            var newFields = document.getElementById('answer').cloneNode(true);
+            var insertHere = document.getElementById("addQuestion");
+            insertHere.parentNode.insertBefore(newFields, insertHere);
+        }
+    </script>
+</head>
+<body>
+    <div id="questionnaire">
+        <form method="post" action="/create">
+            <div id="answer">
+                <label>Fill Question Content:
+                    <textarea rows="5" cols="20" name="content"></textarea>
+                </label>
+            </div>
+            <span id="addQuestion"></span>
+            <input type="button" id="field_add" onclick="addFields()" value="Add New Question"/>
+            <input type="submit" value="Create"/>
+        </form>
+    </div>
+
+</body>
+</html>
