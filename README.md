@@ -9,7 +9,7 @@
   * [Contributing](#contributing)
  
  ## Background
- This project is a mini survey monkey application. User should be able to create questionnaires and allow others to fill it. The surveyor can close his/her questionnaire at any time. The results of this survey would be shown as automatically generated graphs.
+ This project is a mini survey monkey application. User should be able to create questionnaires and allow others to fill it. The surveyor can close his/her questionnaire at any   time. The results of this survey would be shown as automatically generated graphs.
  
  A surveyor can create questionnaire with 3 types of questions. Questions can be open-ended(text), choice question, or asking for a number within a range.
  
@@ -25,9 +25,30 @@
   4. Now we can run our project by clicking Run->main
  
  ## Current State
- 
+ For now, the questionnaire can be collected from back end, user are able to create the questionnaires and allow users to fill it, there are three kinds of questions, they are  multiple choice, choose the number with a range, and open-ending text questions.
+ The surveyor can close the questionnaire anytime, and the results for these questionnaires can be displayed.
+ There is a Github repo, and the app can running on Heroku.
+
  ## Future Plan
- 
+ Add dropdown questions type to allow user to set survey questions with a list of options.
+ Add ability to delete the surveys.
+ Add a help button.
+
  ## Contributing
 Nikki
 1. home page:sign up and login
+
+TianTian Lin
+2. Create Function: create questionnaire after login
+3. Create Function: add three optional questions type buttons 
+4. Crete Function: after create, return to id, from database to front-end
+
+Mario
+5. Search Function: one user ID only can fill the questionnaire once,
+6. Search Function: after submit the questionnaire, return to user page, user can select the next step.
+
+ShiZhong Shang
+7. Create Display Function: user can see the questionnaires created by himself, user can close the questionnaire and generate the result, user need the surveyor id in advance.
+
+Jiatong Han
+8. Create Result Function: Generate results according to the results stored in the database, in order of the title number.
