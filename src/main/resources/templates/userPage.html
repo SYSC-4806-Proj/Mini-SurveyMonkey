@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User And Questionnaire</title>
+</head>
+<body>
+    <form id="questionnaire" method="get" onsubmit="display()">
+        <table id="userQuestionnaire">
+            <tr th:each="Questionnaire : ${User.questionnaire}">
+                <td th:text="${Questionnaire.name}"></td>
+                <td><input type=submit value="Close"></td>
+                <td><input type=button value="Result"><a th:href="/result"></a></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
