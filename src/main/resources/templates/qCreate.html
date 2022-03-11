@@ -3,27 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Questionnaire Create</title>
+
+
     <script>
-        function addFields(){
-            var newFields = document.getElementById('answer').cloneNode(true);
+        function add_OpenEnd_Fields() {
+            var newFields = document.getElementById('open_end').cloneNode(true)
             var insertHere = document.getElementById("addQuestion");
             insertHere.parentNode.insertBefore(newFields, insertHere);
         }
     </script>
+    <script>
+        function add_Range_Fields() {
+            var newFields = document.getElementById('range').cloneNode(true)
+            var insertHere = document.getElementById("addQuestion");
+            insertHere.parentNode.insertBefore(newFields, insertHere);
+        }
+    </script>
+    <script>
+        function add_Selection_Fields() {
+            var newFields = document.getElementById('selection').cloneNode(true)
+            var insertHere = document.getElementById("addQuestion");
+            insertHere.parentNode.insertBefore(newFields, insertHere);
+        }
+    </script>
+
 </head>
 <body>
-    <div id="questionnaire">
-        <form method="post" action="/create">
-            <div id="answer">
-                <label>Fill Question Content:
-                    <textarea rows="5" cols="20" name="content"></textarea>
-                </label>
-            </div>
-            <span id="addQuestion"></span>
-            <input type="button" id="field_add" onclick="addFields()" value="Add New Question"/>
-            <input type="submit" value="Create"/>
-        </form>
-    </div>
+<div id="questionnaire">
+    <form method="POST" action="/create">
+
+        <h3>Create Question</h3>
+
+        <input type="button" id="field_add_openend" onclick="add_OpenEnd_Fields()" value="Add Open End Question"/>
+        <input type="button" id="field_add_range" onclick="add_Range_Fields()" value="Add Range Question"/>
+        <input type="button" id="field_add_selection" onclick="add_Selection_Fields()" value="Add Selection Question"/>
+        <input type="submit" value="Create"/>
+        <span id="addQuestion"></span>
+
+       <div id="open_end">
+           <label>Open End Question:</label>
+           <textarea rows="5" cols="20" name="open_end_question"></textarea>
+
+       </div>
+
+       <div id="range">
+           <label>Range Question:
+               <textarea rows="5" cols="20" name="range_question"></textarea>
+           </label>
+       </div>
+       <div id="selection">
+           <label>Selection Question:
+               <textarea rows="5" cols="20" name="selection_question"></textarea>
+           </label>
+       </div>
+
+   </form>
+
+</div>
+
 
 </body>
 </html>
