@@ -109,5 +109,8 @@ public class AdminController {
 
     //}
 
-
+    @GetMapping("/")
+    public String mainPage(){
+        return "index";
+    }
 }
