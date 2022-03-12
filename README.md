@@ -22,6 +22,7 @@ clone the project to your local directory
    ```sh
    git clone https://github.com/SYSC-4806-Proj/Mini-SurveyMonkey.git
    ```
+   
  <hr>
 
 ## Usage
