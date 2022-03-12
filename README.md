@@ -41,7 +41,7 @@ Copy and paste the following URL on any browser.
 
 ## Milestones
 
-### Milestone 1 (Deadline at March 11th, 2022)
+### Milestone 1 (Deadline: March 11th, 2022)
 
 For Milestone 1, our team designed the whole structure of the Mini-SurveyMonkey. According to our discussion, the program 
 has been break into four parts: front-end (templates), Controller, Backend(Entity models) and Database. <br>
@@ -51,11 +51,11 @@ has been break into four parts: front-end (templates), Controller, Backend(Entit
 <br>The created questions can be saved into database (the Junit test has been made to test create & save questions and write answers fot the questions)
 <br><br>All the Java code has been saved on the GitHub (master branch), all database is uploaded to the Heroku and the program is connected to CircleCI  for automatically continuous integration
 
-### Milestone 2 (Deadline at March 25th, 2022)
+### Milestone 2 (Deadline: March 25th, 2022)
 
  <hr style="border-top: dotted 2px;" />
 
-### Milestone 3 (Deadline at April 8th, 2022)
+### Milestone 3 (Deadline: April 8th, 2022)
 
 
  <hr>
