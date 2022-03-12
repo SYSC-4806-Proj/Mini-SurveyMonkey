@@ -9,7 +9,7 @@
   * [Contributing](#contributing)
  
  ## Background
- This project is a mini survey monkey application. User should be able to create questionnaires and allow others to fill it. The surveyor can close his/her questionnaire at any   time. The results of this survey would be shown as automatically generated graphs.
+ This project is a mini survey monkey application. User should be able to create questionnaires and allow others to fill it. The surveyor can close his/her questionnaire at any time. The results of this survey would be shown as automatically generated graphs.
  
  A surveyor can create questionnaire with 3 types of questions. Questions can be open-ended(text), choice question, or asking for a number within a range.
  
@@ -25,7 +25,7 @@
   4. Now we can run our project by clicking Run->main
  
  ## Current State
- For now, the questionnaire can be collected from back end, user are able to create the questionnaires and allow users to fill it, there are three kinds of questions, they are  multiple choice, choose the number with a range, and open-ending text questions.
+ For now, the questionnaire can be collected from back end, user are able to create the questionnaires and allow users to fill it, there are three kinds of questions, they are selection questions, choose the number with a range, and open-ending text questions.
  The surveyor can close the questionnaire anytime, and the results for these questionnaires can be displayed.
  There is a Github repo, and the app can running on Heroku.
 
