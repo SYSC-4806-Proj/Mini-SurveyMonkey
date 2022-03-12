@@ -7,6 +7,7 @@
 * [Milestones](#Milestones)
 * [Future Plan](#future-plan)
 * [Contributing](#contributing)
+* [Diagrams](#Diagrams)
 
  <hr>
 
@@ -98,3 +99,7 @@ Jiatong Han
 1. Generate the result: the function need the surveyor's id in advance.
 2. Create Result Function: Generate results of the questions' answers from database once the questionnaire is closed. The results are ordered by the question id.
 3. Find the API to convert the results of selection questions and range questions to diagram and pie chart separately.
+
+## Diagrams
+### Database Schema Diagram
+![schema](https://user-images.githubusercontent.com/55708400/158025998-f0325043-ec94-4f13-8496-68bc3f7acdd2.png)
