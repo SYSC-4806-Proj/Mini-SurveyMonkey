@@ -24,6 +24,12 @@ public class AdminController {
         this.questionnaireRepo = questionnaireRepo;
     }
 
+    private UserRepo userRepo;
+
+    public AdminController(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
+
     @RequestMapping(path = "/create", method = RequestMethod.GET)
     public String questionnaireCreateForm() {
         return "qCreate";
@@ -121,4 +127,12 @@ public class AdminController {
     public String mainPage(){
         return "index";
     }
+
+    @RequestMapping(path="/display", method = RequestMethod.GET)
+    public String display(Model model){
+        User user = new User();
+        model.addAttribute("User", user);
+        return "userPage";
+    }
+
 }
