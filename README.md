@@ -30,25 +30,25 @@
  There is a Github repo, and the app can running on Heroku.
 
  ## Future Plan
+ Add user authentication process (login, sign up, logout)
  Add dropdown questions type to allow user to set survey questions with a list of options.
- Add ability to delete the surveys.
- Add a help button.
+ Allow user to delete the surveys.
 
  ## Contributing
 Nikki
-1. home page:sign up and login
+1. basic structure build (raw create function implementation)
 
 TianTian Lin
-2. Create Function: create questionnaire after login
-3. Create Function: add three optional questions type buttons 
-4. Crete Function: after create, return to id, from database to front-end
+1. Create Function: create questionnaire after login
+2. Create Function: add three optional questions type buttons 
+3. Crete Function: after create, return to id, from database to front-end
 
 Mario
-5. Search Function: one user ID only can fill the questionnaire once,
-6. Search Function: after submit the questionnaire, return to user page, user can select the next step.
+1. Search Function: one user ID only can fill the questionnaire once,
+2. Search Function: after submit the questionnaire, return to user page, user can select the next step.
 
 ShiZhong Shang
-7. Create Display Function: user can see the questionnaires created by himself, user can close the questionnaire and generate the result, user need the surveyor id in advance.
+1. Create Display Function: user can see the questionnaires created by himself, user can close the questionnaire and generate the result, user need the surveyor id in advance.
 
 Jiatong Han
-8. Create Result Function: Generate results according to the results stored in the database, in order of the title number.
+1. Create Result Function: Generate results according to the results stored in the database, in order of the title number.
