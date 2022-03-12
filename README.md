@@ -4,7 +4,7 @@
 * [Background](#background)
 * [Install](#install)
 * [Usage](#usage)
-* [Milestone](#Milestone)
+* [Milestones](#Milestones)
 * [Future Plan](#future-plan)
 * [Contributing](#contributing)
 
