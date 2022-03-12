@@ -26,6 +26,12 @@ public class AdminController {
         this.userRepo = userRepo;
     }
 
+    private UserRepo userRepo;
+
+    public AdminController(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
+
     @RequestMapping(path = "/create", method = RequestMethod.GET)
     public String questionnaireCreateForm() {
         return "qCreate";
