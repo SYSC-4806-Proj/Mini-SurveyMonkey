@@ -19,32 +19,17 @@ import java.util.*;
 @Controller
 public class AdminController {
     private QuestionnaireRepo questionnaireRepo;
+    private UserRepo userRepo;
 
-    public AdminController(QuestionnaireRepo questionnaireRepo) {
+    public AdminController(QuestionnaireRepo questionnaireRepo, UserRepo userRepo) {
         this.questionnaireRepo = questionnaireRepo;
+        this.userRepo = userRepo;
     }
 
     @RequestMapping(path = "/create", method = RequestMethod.GET)
     public String questionnaireCreateForm() {
         return "qCreate";
     }
-
-//    @RequestMapping(path="create", method = RequestMethod.POST)
-//    public String questionnaireCreate(@RequestBody MultiValueMap<String, String> formData){
-//        Questionnaire questionnaire = new Questionnaire();
-//
-//        for(List<String> value: formData.values()){
-//                for(String content: value){
-//                    Range q = new Range();
-//                    q.setQuestion(content);
-//                    questionnaire.addQuestion(q);
-//                    System.out.println(content);
-//                }
-//        }
-//        questionnaireRepo.save(questionnaire);
-//        long id = questionnaire.getId();
-//        return "redirect:/view/" + id;
-//    }
 
 
     @GetMapping("/view/{id}")
@@ -111,17 +96,16 @@ public class AdminController {
         return "redirect:/view/" + id;
         }
 
-
-
-
-
-    //@RequestMapping(path="/create", method = RequestMethod.GET)
-    //public String chooseQuestionType(){
-
-    //}
-
     @GetMapping("/")
     public String mainPage(){
         return "index";
     }
+
+    @RequestMapping(path="/display", method = RequestMethod.GET)
+    public String display(Model model){
+        User user = new User();
+        model.addAttribute("User", user);
+        return "userPage";
+    }
+
 }
