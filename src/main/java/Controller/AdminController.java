@@ -110,10 +110,7 @@ public class AdminController {
         long id = questionnaire.getId();
         return "redirect:/view/" + id;
         }
-
-
-
-
+        
 
     //@RequestMapping(path="/create", method = RequestMethod.GET)
     //public String chooseQuestionType(){
