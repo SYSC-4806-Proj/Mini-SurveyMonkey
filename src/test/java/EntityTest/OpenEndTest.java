@@ -57,7 +57,7 @@ public class OpenEndTest {
         assertEquals(question1.getQuestion(), "Do you feel cold tonight?");
         assertNull(question2.getQuestion());
         question2.setQuestion("How is your day?");
-        assertNull(question2.getQuestion());
+        assertEquals(question2.getQuestion(), "How is your day?");
     }
 
 }
