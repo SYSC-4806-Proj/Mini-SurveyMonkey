@@ -94,10 +94,18 @@ public class AdminController {
         return "index";
     }
 
-    @RequestMapping(path="/display", method = RequestMethod.GET)
-    public String display(Model model){
-        User user = new User();
+    @RequestMapping(path="/display/{id}", method = RequestMethod.GET)
+    public String display(@PathVariable long id, Model model){
+        User user = this.userRepo.findById(id);
+        user.getQuestionnaire();
+
+        if(user.getQuestionnaire() == null){
+            return "noQuestionnaire";
+        }
+
         model.addAttribute("User", user);
+        model.addAttribute("Questionnaire", user.getQuestionnaire());
+
         return "userPage";
     }
 

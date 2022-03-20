@@ -21,9 +21,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @ElementCollection
-    @Column(name = "questionnaires")
-    private List<Long> questionnaireId = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Questionnaire> questionnaire = new ArrayList<>();
 
     /**
      * Instantiates a new User.
@@ -102,25 +101,25 @@ public class User {
      *
      * @return the questionnaire id
      */
-    public List<Long> getQuestionnaireId() {
-        return questionnaireId;
+    public List<Questionnaire> getQuestionnaire() {
+        return questionnaire;
     }
 
     /**
      * Sets questionnaire id.
      *
-     * @param questionnaireId the questionnaire id
+     * @param questionnaire the questionnaire id
      */
-    public void setQuestionnaireId(List<Long> questionnaireId) {
-        this.questionnaireId = questionnaireId;
+    public void setQuestionnaire(List<Questionnaire> questionnaire) {
+        this.questionnaire = questionnaire;
     }
 
     /**
      * Add questionnaire.
      *
-     * @param id the id
+     * @param questionnaire the questionnaire
      */
-    public void addQuestionnaire(Long id){
-        this.questionnaireId.add(id);
+    public void addQuestion(Questionnaire questionnaire){
+        this.questionnaire.add(questionnaire);
     }
 }

@@ -5,10 +5,10 @@
     <title>User And Questionnaire</title>
 </head>
 <body>
-    <form id="questionnaire" method="get" onsubmit="display()">
+    <form id="questionnaire" method="get">
         <table id="userQuestionnaire">
             <tr th:each="Questionnaire : ${User.questionnaire}">
-                <td th:text="${Questionnaire.name}"></td>
+                <td th:text="${Questionnaire}"></td>
                 <td><input type=submit value="Close"></td>
                 <td><input type=button value="Result"><a th:href="/result"></a></td>
             </tr>
