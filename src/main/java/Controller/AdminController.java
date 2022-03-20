@@ -29,7 +29,12 @@ public class AdminController {
     public String viewQuestionnaire(@PathVariable long id, Model model){
         Questionnaire questionnaire = this.questionnaireRepo.findById(id);
         if (questionnaire == null) {
-            return "qCreate";
+            model.addAttribute("error","The survey "+id+" does not exist, try another id later.");
+            return "errorRedirect";
+        }
+        if(questionnaire.isClosed()){
+            model.addAttribute("error","The survey is closed, try another id later.");
+            return "errorRedirect";
         }
         model.addAttribute("questionnaire", questionnaire);
         List<Long> openEndIdList = new ArrayList<>();
@@ -47,12 +52,17 @@ public class AdminController {
         model.addAttribute("openEndList",openEndIdList);
         model.addAttribute("rangeList", rangeIdList);
         model.addAttribute("selectionList", selectionIdList);
-        return "qView";
+        return "doSurvey";
     }
 
-    @RequestMapping(path = "/view", method = RequestMethod.POST)
-    public String submitSurveyAnswer(){
-        System.out.println("Success!!!!!!!!!!");
+    @RequestMapping(path = "/view/{id}", method = RequestMethod.POST)
+    public String submitSurveyAnswer(@PathVariable long id, HttpServletRequest request){
+        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
+        if(questionnaire == null){
+            return null;
+        }
+        for(Question question:questionnaire.getQuestionList()){
+        }
         return "completeSurvey";
     }
 

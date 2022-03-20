@@ -18,7 +18,6 @@ public abstract class Question {
     /**
      * The Question.
      */
-    @Column(name = "question")
     protected String question;
 
     /**

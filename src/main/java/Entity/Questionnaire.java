@@ -2,7 +2,6 @@ package Entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -27,7 +26,6 @@ public class Questionnaire {
      * Instantiates a new Questionnaire.
      */
     public Questionnaire(){
-
     }
 
     /**

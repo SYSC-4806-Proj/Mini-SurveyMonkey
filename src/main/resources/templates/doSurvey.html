@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>View Questionnaire</title>
@@ -7,27 +7,28 @@
 
 <body>
     <h2 th:text="${'Survey '+questionnaire.getId()+': '+questionnaire.getName()}"></h2>
-    <form method="POST" action="/view">
+    <form th:action="@{'/view/'+${questionnaire.getId()}}" th:method="post">
         <ol>
-            <div th:each="ques : ${questionnaire.questionList}">
-                <li>
+            <li th:each="ques : ${questionnaire.questionList}">
                 <p th:text="${ques.question}"></p>
-                <textarea th:if="${openEndList.contains(ques.getId())}" cols="40" rows="5"></textarea>
-                <input th:if="${rangeList.contains(ques.getId())}" type="range" th:value="${ques.getMinBoundary()}"
+                <textarea th:if="${openEndList.contains(ques.getId())}" name="answer" cols="40" rows="5"></textarea>
+                <input th:if="${rangeList.contains(ques.getId())}" type="range" name="answer" th:value="${ques.getMinBoundary()}"
                        th:min="${ques.getMinBoundary()}" th:max="${ques.getMaxBoundary()}"
                        oninput="this.nextElementSibling.value = this.value">
                 <output th:if="${rangeList.contains(ques.getId())}" th:text="${ques.getMinBoundary()}"></output>
                 <div th:if="${selectionList.contains(ques.getId())}">
                     <label>Please Select Your Answer:</label>
-                    <select id="selectAnswer">
+                    <select id="selectAnswer" name="answer">
                         <option th:each="option : ${ques.getOptions()}" th:value="${option}" th:text="${option}"></option>
                     </select>
                 </div>
-                </li>
-                <br>
-            </div>
+            </li>
+            <br>
         </ol>
         <input type="submit" value="Submit">
     </form>
+    <a href="/">
+        <button>Back to Main</button>
+    </a>
 </body>
 </html>

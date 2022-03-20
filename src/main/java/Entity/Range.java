@@ -11,17 +11,13 @@ import java.util.List;
  * The question for a number in a range.
  */
 @Entity
-@Table(name = "range")
 public class Range extends Question{
 
-    @Column(name = "min_boundary")
     private int minBoundary;
 
-    @Column(name = "max_boundary")
     private int maxBoundary;
 
     @ElementCollection
-    @Column(name = "answers")
     private List<Integer> answers = new ArrayList<>();
 
     /**
