@@ -8,12 +8,10 @@ import java.util.List;
  * The type Open end questions.
  */
 @Entity
-@Table(name = "open_end")
 public class OpenEnd extends Question{
     //open-ended questions
 
     @ElementCollection
-    @Column(name = "answer")
     private List<String> answers = new ArrayList<>();
 
     /**
@@ -46,7 +44,7 @@ public class OpenEnd extends Question{
      *
      * @return the list
      */
-    public List<String> getAnswer(){
+    public List<String> getAnswers(){
         return answers;
     }
 

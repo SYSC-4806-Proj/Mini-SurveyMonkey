@@ -34,12 +34,12 @@ public class OpenEndTest {
 
         question4.setAnswer(answers1);
         question3.setAnswer(answers2);
-        assertEquals(question4.getAnswer(), compareAnswers1);
-        assertEquals(question3.getAnswer(), compareAnswers2);
+        assertEquals(question4.getAnswers(), compareAnswers1);
+        assertEquals(question3.getAnswers(), compareAnswers2);
 
         question4.addAnswer("fine");
         answers1.add("fine");
-        assertEquals(question4.getAnswer(), answers1);
+        assertEquals(question4.getAnswers(), answers1);
     }
 
     @Test
@@ -55,9 +55,9 @@ public class OpenEndTest {
     public void testGetAndSetQuestions() {
         question1.setQuestion("Do you feel cold tonight?");
         assertEquals(question1.getQuestion(), "Do you feel cold tonight?");
-        assertEquals(question2.getQuestion(), null);
+        assertNull(question2.getQuestion());
         question2.setQuestion("How is your day?");
-        assertEquals(question2.getQuestion(), "How is your day?");
+        assertNull(question2.getQuestion());
     }
 
 }

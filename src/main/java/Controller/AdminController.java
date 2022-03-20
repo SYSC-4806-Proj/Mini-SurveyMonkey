@@ -56,13 +56,17 @@ public class AdminController {
     }
 
     @RequestMapping(path = "/view/{id}", method = RequestMethod.POST)
-    public String submitSurveyAnswer(@PathVariable long id, HttpServletRequest request){
+    public String submitSurveyAnswer(@PathVariable long id, String[] answer){
         Questionnaire questionnaire = this.questionnaireRepo.findById(id);
         if(questionnaire == null){
             return null;
         }
+        int i = 0;
         for(Question question:questionnaire.getQuestionList()){
+            question.addAnswer(answer[i]);
+            i++;
         }
+        questionnaireRepo.save(questionnaire);
         return "completeSurvey";
     }
 
