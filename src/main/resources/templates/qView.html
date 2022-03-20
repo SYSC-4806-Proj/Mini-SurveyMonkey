@@ -4,20 +4,30 @@
     <meta charset="UTF-8">
     <title>View Questionnaire</title>
 </head>
+
 <body>
-    <div th:each="ques : ${questionnaire.questionList}">
-        <p th:text="${ques.question}"></p>
-        <textarea th:if="${openEndList.contains(ques.getId())}" cols="40" rows="5"></textarea>
-        <input th:if="${rangeList.contains(ques.getId())}" type="range" th:value="${ques.getMinBoundary()}"
-               th:min="${ques.getMinBoundary()}" th:max="${ques.getMaxBoundary()}"
-               oninput="this.nextElementSibling.value = this.value">
-        <output th:if="${rangeList.contains(ques.getId())}" th:text="${ques.getMinBoundary()}"></output>
-        <form th:if="${selectionList.contains(ques.getId())}">
-            <label>Please Select Your Answer:</label>
-            <select id="selectAnswer">
-                <option th:each="option : ${ques.getOptions()}" th:value="${option}" th:text="${option}"></option>
-            </select>
-        </form>
-    </div>
+    <h2 th:text="${'Survey '+questionnaire.getId()+': '+questionnaire.getName()}"></h2>
+    <form method="POST" action="/view">
+        <ol>
+            <div th:each="ques : ${questionnaire.questionList}">
+                <li>
+                <p th:text="${ques.question}"></p>
+                <textarea th:if="${openEndList.contains(ques.getId())}" cols="40" rows="5"></textarea>
+                <input th:if="${rangeList.contains(ques.getId())}" type="range" th:value="${ques.getMinBoundary()}"
+                       th:min="${ques.getMinBoundary()}" th:max="${ques.getMaxBoundary()}"
+                       oninput="this.nextElementSibling.value = this.value">
+                <output th:if="${rangeList.contains(ques.getId())}" th:text="${ques.getMinBoundary()}"></output>
+                <div th:if="${selectionList.contains(ques.getId())}">
+                    <label>Please Select Your Answer:</label>
+                    <select id="selectAnswer">
+                        <option th:each="option : ${ques.getOptions()}" th:value="${option}" th:text="${option}"></option>
+                    </select>
+                </div>
+                </li>
+                <br>
+            </div>
+        </ol>
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>

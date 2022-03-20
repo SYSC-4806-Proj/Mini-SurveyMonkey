@@ -50,6 +50,12 @@ public class AdminController {
         return "qView";
     }
 
+    @RequestMapping(path = "/view", method = RequestMethod.POST)
+    public String submitSurveyAnswer(){
+        System.out.println("Success!!!!!!!!!!");
+        return "completeSurvey";
+    }
+
     @RequestMapping(path = "/create", method = RequestMethod.POST)
     public String questionnaireCreate(HttpServletRequest request) {
         Questionnaire questionnaire = new Questionnaire();
