@@ -1,6 +1,7 @@
 package Entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * abstract class for all questions
@@ -18,7 +19,6 @@ public abstract class Question {
     /**
      * The Question.
      */
-    @Column(name = "question")
     protected String question;
 
     /**
@@ -71,4 +71,8 @@ public abstract class Question {
     public void setQuestion(String question) {
         this.question = question;
     }
+
+    abstract public void addAnswer(String answer);
+
+    abstract public List<String> getAnswers();
 }
