@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 @Controller
@@ -55,11 +58,18 @@ public class AdminController {
         return "doSurvey";
     }
 
-    @RequestMapping(path = "/view/{id}", method = RequestMethod.POST)
-    public String submitSurveyAnswer(@PathVariable long id, String[] answer){
+    @PostMapping("/view/{id}")
+    public String submitSurveyAnswer(@PathVariable long id, String[] answer, Model model, HttpServletResponse resp) throws IOException {
         Questionnaire questionnaire = this.questionnaireRepo.findById(id);
+        PrintWriter out = resp.getWriter();
         if(questionnaire == null){
             return null;
+        }
+        for(int i = 0; i < answer.length; i++){
+            if(answer[i].equals("")){
+                out.println("<script language='javascript'>alert('You still have incomplete question(s). Fill them all and submit again.')</script>");
+                out.println("<script language='javascript'>window.location.href='/view/"+id+"'</script>");
+            }
         }
         int i = 0;
         for(Question question:questionnaire.getQuestionList()){
