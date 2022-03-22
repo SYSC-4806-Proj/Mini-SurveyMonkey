@@ -94,6 +94,7 @@ public class AdminController {
         return "index";
     }
 
+
     @RequestMapping(path="/display/{id}", method = RequestMethod.GET)
     public String display(@PathVariable long id, Model model){
         User user = this.userRepo.findById(id);
