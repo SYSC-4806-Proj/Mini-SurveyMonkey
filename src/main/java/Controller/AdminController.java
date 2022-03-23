@@ -94,7 +94,6 @@ public class AdminController {
         return "index";
     }
 
-
     @RequestMapping(path="/display/{id}", method = RequestMethod.GET)
     public String display(@PathVariable long id, Model model){
         User user = this.userRepo.findById(id);
@@ -105,8 +104,20 @@ public class AdminController {
         }
 
         model.addAttribute("User", user);
-        model.addAttribute("Questionnaire", user.getQuestionnaire());
+        //model.addAttribute("Questionnaire", user.getQuestionnaire());
 
+        return "userPage";
+    }
+
+    @RequestMapping(path="/display/{id}", method = RequestMethod.POST)
+    public String closeSurvey(@PathVariable long id, Model model){
+        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
+        User user = this.userRepo.findById(1);
+
+        questionnaire.setClosed(true);
+        this.questionnaireRepo.save(questionnaire);
+
+        model.addAttribute("User", user);
         return "userPage";
     }
 
