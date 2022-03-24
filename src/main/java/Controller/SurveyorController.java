@@ -12,12 +12,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+/**
+ * This class controls pages that used to create questionnaires
+ */
 @Controller
-public class AdminController {
+public class SurveyorController {
     private QuestionnaireRepo questionnaireRepo;
     private UserRepo userRepo;
 
-    public AdminController(QuestionnaireRepo questionnaireRepo, UserRepo userRepo) {
+    public SurveyorController(QuestionnaireRepo questionnaireRepo, UserRepo userRepo) {
         this.questionnaireRepo = questionnaireRepo;
         this.userRepo = userRepo;
     }
@@ -118,11 +121,6 @@ public class AdminController {
         long id = questionnaire.getId();
         return "redirect:/view/" + id;
         }
-
-    @GetMapping("/")
-    public String mainPage(){
-        return "index";
-    }
 
     @RequestMapping(path="/display", method = RequestMethod.GET)
     public String display(Model model){

@@ -1,21 +1,12 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <title>Welcome</title>
 </head>
-<script>
-    function viewFunction(){
-        var action ='view/'+document.getElementsByName("id")[0].value;
-        var form = document.getElementById("view-form");
-        document.getElementsByName("id")[0].remove();
-        form.action = action;
-    }
-</script>
 <body>
-    <p>Create Questionnaire <a href="/create">here</a></p>
-    <form id="view-form" method="get" onsubmit="viewFunction()">
-        Find Questionnaire to Answer: <input type="number" name="id">
-        <input type="submit" value="View Questionnaire">
-    </form>
+    <div>
+        <p><a href="/login">Click</a> to login</p>
+    </div>
 </body>
 </html>
