@@ -38,8 +38,12 @@ clone the project to your local directory
 4. Now we can run our project by clicking Run->main
 ### Run Remotely:
 Click this URL:
+  ```sh
   [https://mini-survey-monkey18.herokuapp.com/](https://mini-survey-monkey18.herokuapp.com/)
-
+  ```
+   
+ <hr>
+ 
 ## Milestones
 
 ### Milestone 1 (Deadline: March 11th, 2022)
