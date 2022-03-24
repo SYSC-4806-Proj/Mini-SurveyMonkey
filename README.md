@@ -1,8 +1,8 @@
 # Mini-SurveyMonkey
 
 <!-- PROJECT SHIELDS -->
-![GitHub contributors](https://img.shields.io/github/contributors/SYSC-4806-Proj/Mini-SurveyMonkey?color=%232596be&style=flat-square)(https://github.com/SYSC-4806-Proj/Mini-SurveyMonkey/graphs/contributors)
-![GitHub issues](https://img.shields.io/github/issues/SYSC-4806-Proj/Mini-SurveyMonkey?color=%23e28743&style=flat-square)(https://github.com/SYSC-4806-Proj/Mini-SurveyMonkey/issues)
+![GitHub contributors](https://img.shields.io/github/contributors/SYSC-4806-Proj/Mini-SurveyMonkey?color=%232596be&style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/SYSC-4806-Proj/Mini-SurveyMonkey?color=%23e28743&style=flat-square)
 
 ## Content
 * [Background](#background)
@@ -37,7 +37,8 @@ clone the project to your local directory
 3. Find the Maven tab on the right, click on SYSC4806->Lifecycle->Package. This will compile a build that is able to run.
 4. Now we can run our project by clicking Run->main
 ### Run Remotely:
-Click this URL.
+Click this URL:
+
   [https://mini-survey-monkey18.herokuapp.com/](https://mini-survey-monkey18.herokuapp.com/)
 
 ## Milestones
