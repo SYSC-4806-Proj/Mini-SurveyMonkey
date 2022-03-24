@@ -104,4 +104,4 @@ Jiatong Han
 
 ## Diagrams
 ### Database Schema Diagram
-![schema](https://user-images.githubusercontent.com/55708400/158025998-f0325043-ec94-4f13-8496-68bc3f7acdd2.png)
+![image](https://user-images.githubusercontent.com/55708400/159991499-85017264-2c00-4b0e-8c0b-ef5863b83d5d.png)
