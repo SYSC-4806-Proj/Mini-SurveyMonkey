@@ -1,10 +1,8 @@
 # Mini-SurveyMonkey
 
 <!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
+![GitHub contributors](https://img.shields.io/github/contributors/SYSC-4806-Proj/Mini-SurveyMonkey?color=%232596be&style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/SYSC-4806-Proj/Mini-SurveyMonkey?color=%23e28743&style=flat-square)
 
 ## Content
 * [Background](#background)
