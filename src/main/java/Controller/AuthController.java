@@ -3,6 +3,8 @@ package Controller;
 import Entity.User;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,4 +42,12 @@ public class AuthController {
 
         return "login";
     }
+
+    @GetMapping("/home")
+    public String showHome(Model model, Authentication authentication){
+        String username = authentication.getName();
+        model.addAttribute("username", username);
+        return "home";
+    }
+
 }

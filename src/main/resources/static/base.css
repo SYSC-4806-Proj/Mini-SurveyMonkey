@@ -1,0 +1,35 @@
+.navbar{
+    width:100%;
+    height: 60px;
+    top: 0;
+    background-color: #f0f5f3;
+    overflow: hidden;
+    position:relative;
+}
+
+ul[id="list"]{
+    list-style-type: none;
+    float: right;
+    margin-right: 60px;
+}
+
+ul[id="list"] li{
+    display: inline-block;
+    padding: 15px 15px;
+    height: 54px;
+}
+
+ul[id="list"] li a{
+    color: #507c70;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+ul[id="list"] li.hover{
+    color: #93b9ae;
+}
+
+ul[id="list"] li a.hover{
+    color: #f0f5f3;
+}
