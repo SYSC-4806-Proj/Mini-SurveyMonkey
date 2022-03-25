@@ -15,92 +15,48 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(nullable = false, unique = true)
+    private String username;
 
-    @Column(name = "password")
+    @Column(nullable = false)
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Questionnaire> questionnaire = new ArrayList<>();
 
-    /**
-     * Instantiates a new User.
-     */
     public User() {
     }
 
-    /**
-     * Instantiates a new User.
-     *
-     * @param name     the name
-     * @param password the password
-     */
-    public User(String name, String password) {
-        this.name = name;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
-    /**
-     * Sets id.
-     *
-     * @param id the id
-     */
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * Gets id.
-     *
-     * @return the id
-     */
     public Long getId() {
         return id;
     }
 
-
-    /**
-     * Gets name.
-     *
-     * @return the name
-     */
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    /**
-     * Sets name.
-     *
-     * @param name the name
-     */
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    /**
-     * Gets password.
-     *
-     * @return the password
-     */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * Sets password.
-     *
-     * @param password the password
-     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    /**
-     * Gets questionnaire id.
-     *
-     * @return the questionnaire id
-     */
     public List<Questionnaire> getQuestionnaire() {
         return questionnaire;
     }

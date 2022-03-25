@@ -7,14 +7,20 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
+/**
+ * This class controls pages that used to create questionnaires
+ */
 @Controller
-public class AdminController {
+public class SurveyorController {
     private QuestionnaireRepo questionnaireRepo;
     private UserRepo userRepo;
 
-    public AdminController(QuestionnaireRepo questionnaireRepo, UserRepo userRepo) {
+    public SurveyorController(QuestionnaireRepo questionnaireRepo, UserRepo userRepo) {
         this.questionnaireRepo = questionnaireRepo;
         this.userRepo = userRepo;
     }
@@ -29,7 +35,12 @@ public class AdminController {
     public String viewQuestionnaire(@PathVariable long id, Model model){
         Questionnaire questionnaire = this.questionnaireRepo.findById(id);
         if (questionnaire == null) {
-            return "qCreate";
+            model.addAttribute("error","The survey "+id+" does not exist, try another id later.");
+            return "errorRedirect";
+        }
+        if(questionnaire.isClosed()){
+            model.addAttribute("error","The survey is closed, try another id later.");
+            return "errorRedirect";
         }
         model.addAttribute("questionnaire", questionnaire);
         List<Long> openEndIdList = new ArrayList<>();
@@ -47,7 +58,29 @@ public class AdminController {
         model.addAttribute("openEndList",openEndIdList);
         model.addAttribute("rangeList", rangeIdList);
         model.addAttribute("selectionList", selectionIdList);
-        return "qView";
+        return "doSurvey";
+    }
+
+    @PostMapping("/view/{id}")
+    public String submitSurveyAnswer(@PathVariable long id, String[] answer, Model model, HttpServletResponse resp) throws IOException {
+        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
+        PrintWriter out = resp.getWriter();
+        if(questionnaire == null){
+            return null;
+        }
+        for(int i = 0; i < answer.length; i++){
+            if(answer[i].equals("")){
+                out.println("<script language='javascript'>alert('You still have incomplete question(s). Fill them all and submit again.')</script>");
+                out.println("<script language='javascript'>window.location.href='/view/"+id+"'</script>");
+            }
+        }
+        int i = 0;
+        for(Question question:questionnaire.getQuestionList()){
+            question.addAnswer(answer[i]);
+            i++;
+        }
+        questionnaireRepo.save(questionnaire);
+        return "completeSurvey";
     }
 
     @RequestMapping(path = "/create", method = RequestMethod.POST)
@@ -89,34 +122,9 @@ public class AdminController {
         return "redirect:/view/" + id;
         }
 
-    @GetMapping("/")
-    public String mainPage(){
-        return "index";
-    }
-
-    @RequestMapping(path="/display/{id}", method = RequestMethod.GET)
-    public String display(@PathVariable long id, Model model){
-        User user = this.userRepo.findById(id);
-        user.getQuestionnaire();
-
-        if(user.getQuestionnaire() == null){
-            return "noQuestionnaire";
-        }
-
-        model.addAttribute("User", user);
-        //model.addAttribute("Questionnaire", user.getQuestionnaire());
-
-        return "userPage";
-    }
-
-    @RequestMapping(path="/display/{id}", method = RequestMethod.POST)
-    public String closeSurvey(@PathVariable long id, Model model){
-        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
-        User user = this.userRepo.findById(1);
-
-        questionnaire.setClosed(true);
-        this.questionnaireRepo.save(questionnaire);
-
+    @RequestMapping(path="/display", method = RequestMethod.GET)
+    public String display(Model model){
+        User user = new User();
         model.addAttribute("User", user);
         return "userPage";
     }

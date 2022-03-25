@@ -3,7 +3,6 @@ package Entity;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,18 +10,14 @@ import java.util.List;
  * The question for a number in a range.
  */
 @Entity
-@Table(name = "range")
 public class Range extends Question{
 
-    @Column(name = "min_boundary")
     private int minBoundary;
 
-    @Column(name = "max_boundary")
     private int maxBoundary;
 
     @ElementCollection
-    @Column(name = "answers")
-    private List<Integer> answers = new ArrayList<>();
+    private List<String> answers = new ArrayList<>();
 
     /**
      * Instantiates a new Range question.
@@ -83,7 +78,7 @@ public class Range extends Question{
      *
      * @return the answers
      */
-    public List<Integer> getAnswers() {
+    public List<String> getAnswers() {
         return answers;
     }
 
@@ -92,7 +87,7 @@ public class Range extends Question{
      *
      * @param answers the answers
      */
-    public void setAnswers(List<Integer> answers) {
+    public void setAnswers(List<String> answers) {
         this.answers = answers;
     }
 
@@ -101,7 +96,7 @@ public class Range extends Question{
      *
      * @param answer the answer
      */
-    public void addAnswer(Integer answer){
+    public void addAnswer(String answer){
         this.answers.add(answer);
     }
 

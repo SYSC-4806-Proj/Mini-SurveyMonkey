@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Survey Closed</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1 th:utext="${error+'<br>Redirect you to home page...'}"></h1>
+<script>
+    window.setTimeout(function (){
+        window.location.href='/';
+    }, 3000)
+</script>
+</body>
+</html>

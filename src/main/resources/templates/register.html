@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script>
+        var timeoutID;
+        function confirmPwd(pwd2) {
+            var msg = document.getElementById("msg")
+            var pwd1 = document.getElementById("password").value;
+            clearTimeout(timeoutID);
+            timeoutID = setTimeout(function () {
+                if(pwd1 != pwd2){
+                    msg.innerText = "entered passwords are inconsistent";
+                }
+                else{
+                    msg.innerText = "√"
+                }
+            }, 500)
+        }
+    </script>
+</head>
+<body>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <div>
+            <span>User Name: </span>
+            <input type="text" th:field="*{username}" required/>
+        </div>
+        <div>
+            <span>Password: </span>
+            <input type="password" th:field="*{password}" required>
+        </div>
+        <div>
+            <span>Confirm Password:</span>
+            <label id="msg"></label>
+            <input type="text" name="confirm" required oninput="confirmPwd(this.value)">
+        </div>
+        <div>
+            <input type="submit" value="Sign In"/>
+        </div>
+    </form>
+</body>
+</html>

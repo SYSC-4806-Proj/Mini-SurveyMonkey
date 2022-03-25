@@ -29,18 +29,18 @@ public class RangeTest {
 
     @Test
     public void testGetSetAddAnswers(){
-        ArrayList<Integer> answers1 = new ArrayList<>(Arrays.asList(32,64,58));
-        ArrayList<Integer> answers2 = new ArrayList<>(Arrays.asList(73,84));
-        ArrayList<Integer> compareAnswers1 = new ArrayList<>(Arrays.asList(32,64,58));
-        ArrayList<Integer> compareAnswers2 = new ArrayList<>(Arrays.asList(73,84));
+        ArrayList<String> answers1 = new ArrayList<>(Arrays.asList("32","64","58"));
+        ArrayList<String> answers2 = new ArrayList<>(Arrays.asList("73","84"));
+        ArrayList<String> compareAnswers1 = new ArrayList<>(Arrays.asList("32","64","58"));
+        ArrayList<String> compareAnswers2 = new ArrayList<>(Arrays.asList("73","84"));
 
         question3.setAnswers(answers1);
         question4.setAnswers(answers2);
         assertEquals(question3.getAnswers(), compareAnswers1);
         assertEquals(question4.getAnswers(), compareAnswers2);
 
-        question3.addAnswer(62);
-        compareAnswers1.add(62);
+        question3.addAnswer("62");
+        compareAnswers1.add("62");
         assertEquals(question3.getAnswers(), compareAnswers1);
     }
 
@@ -59,7 +59,7 @@ public class RangeTest {
     public void testGetSetQuestion(){
         question1.setQuestion("Do you feel cold tonight?");
         assertEquals(question1.getQuestion(), "Do you feel cold tonight?");
-        assertEquals(question2.getQuestion(), null);
+        assertNull(question2.getQuestion());
         question2.setQuestion("How is your day?");
         assertEquals(question2.getQuestion(), "How is your day?");
     }
