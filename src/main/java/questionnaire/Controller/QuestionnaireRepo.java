@@ -8,5 +8,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface QuestionnaireRepo extends PagingAndSortingRepository<Questionnaire, Long>{
 
     Questionnaire findById(long id);
-
 }
