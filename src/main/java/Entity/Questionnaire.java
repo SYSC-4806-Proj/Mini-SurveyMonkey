@@ -8,7 +8,6 @@ import java.util.List;
  * The type Questionnaire.
  */
 @Entity
-@Table(name = "questionnaire")
 public class Questionnaire {
 
     @Id
@@ -20,6 +19,7 @@ public class Questionnaire {
     private boolean isClosed;
 
     @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @JoinTable(name  = "questionnaire_question", joinColumns = {@JoinColumn(name="questionnaire_id")}, inverseJoinColumns = {@JoinColumn (name="question_id")})
     private List<Question> questionList = new ArrayList<>();
 
     /**
