@@ -1,11 +1,11 @@
-package Controller;
+package questionnaire.Controller;
 
 
-import Entity.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import questionnaire.Entity.*;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -143,18 +143,16 @@ public class SurveyorController {
                        //Range q = new Range(question_content[i], Integer. valueOf(question_content[i+1]),Integer. valueOf(question_content[i+2]));
                       //questionnaire.addQuestion(q);
                    }
-                }
-            } else if (entry.getKey().equals("selection_question")) {
+                } else if (entry.getKey().equals("selection_question")) {
                 String[] question_content = entry.getValue().clone();
-                for (int i = 0;i < question_content.length;i=i+2){
-                    if(question_content[i].equals("")||question_content[i+1].equals("")){
+                for (int i = 0; i < question_content.length; i = i + 2) {
+                    if (question_content[i].equals("") || question_content[i + 1].equals("")) {
                         out.println("<script language='javascript'>alert('You still have incomplete question(s). Fill them all and submit again.')</script>");
                         out.println("<script language='javascript'>window.location.href='/create'</script>");
-                    }
-                    else{
-                        String[] list = question_content[i+1].split(",");
+                    } else {
+                        String[] list = question_content[i + 1].split(",");
                         List<String> l = Arrays.asList(list);
-                        Selection q = new Selection(question_content[i],l);
+                        Selection q = new Selection(question_content[i], l);
                         questionnaire.addQuestion(q);
                     }
                     //String[] list = question_content[i+1].split(",");
@@ -164,6 +162,7 @@ public class SurveyorController {
                 }
 
             }
+        }
         User user = this.userRepo.findByUsername(authentication.getName());
         user.addQuestion(questionnaire);
         this.userRepo.save(user);
