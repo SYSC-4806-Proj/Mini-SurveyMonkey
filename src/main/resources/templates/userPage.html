@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>User And Questionnaire</title>
+    <link th:href="@{../static/css/base.css}" type="text/css" rel="stylesheet"/>
 </head>
 <body>
+    <div th:if="${QNotEmpty}" >
         <p th:text="${User.id}"></p>
         <table id="userQuestionnaire">
             <tr th:each="Survey : ${User.questionnaire}">
@@ -13,6 +15,10 @@
                 <td th:if = "${Survey.isClosed()}"><a href="/home"><input type=button value="Result"></a></td>
             </tr>
         </table>
+    </div>
+    <div class="errorContainer" th:if="${not QNotEmpty}">
+        <p class="errorMsg">You have no questionnaire, <a class="errorMsg" href="/home">click</a> to return home page</p>
+    </div>
 </body>
 </html>
 

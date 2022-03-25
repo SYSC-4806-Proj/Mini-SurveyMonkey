@@ -3,9 +3,12 @@
 <head>
     <title>Survey Closed</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{../static/css/base.css}" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<h1 th:utext="${error+'<br>Redirect you to home page...'}"></h1>
+<div class="errorContainer">
+    <p class="errorMsg" th:utext="${error+'<br>Redirect you to home page...'}"></p>
+</div>
 <script>
     window.setTimeout(function (){
         window.location.href='/';

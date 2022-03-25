@@ -3,41 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link th:href="@{../static/css/base.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{../static/css/auth.css}" type="text/css" rel="stylesheet"/>
     <script>
         var timeoutID;
         function confirmPwd(pwd2) {
-            var msg = document.getElementById("msg")
+            var confirm = document.getElementById("confirm")
             var pwd1 = document.getElementById("password").value;
             clearTimeout(timeoutID);
             timeoutID = setTimeout(function () {
                 if(pwd1 != pwd2){
-                    msg.innerText = "entered passwords are inconsistent";
+                    confirm.style.boxShadow = "0 0 5px #ad1f1f inset"
+                    document.getElementById('submit').disabled = true;
                 }
                 else{
-                    msg.innerText = "√"
+                    confirm.style.boxShadow = "0 0 5px #19b366 inset"
+                    document.getElementById('submit').disabled = false;
                 }
             }, 500)
         }
     </script>
 </head>
 <body>
-    <form th:action="@{/register}" th:object="${user}" method="post">
-        <div>
-            <span>User Name: </span>
-            <input type="text" th:field="*{username}" required/>
+    <div class="wrapper">
+        <div id="formContent">
+            <a class="inactive underlineHover" href="/login">Sign In</a>
+            <h2 class="active">Sign Up</h2>
+            <form th:action="@{/register}" th:object="${user}" method="post">
+                <input type="text" th:field="*{username}" class="fadeIn first" placeholder="username"/>
+                <input type="password" th:field="*{password}" class="fadeIn second" placeholder="password">
+                <input type="password" id="confirm" required oninput="confirmPwd(this.value)" placeholder="confirm password" class="fadeIn third">
+                <input type="submit" id="submit" value="Sign Up" class="fadeIn fourth"/>
+            </form>
         </div>
-        <div>
-            <span>Password: </span>
-            <input type="password" th:field="*{password}" required>
-        </div>
-        <div>
-            <span>Confirm Password:</span>
-            <label id="msg"></label>
-            <input type="password" name="confirm" required oninput="confirmPwd(this.value)">
-        </div>
-        <div>
-            <input type="submit" value="Sign In"/>
-        </div>
-    </form>
+    </div>
 </body>
 </html>
