@@ -11,7 +11,6 @@ import java.util.List;
  * The type Selection Question.
  */
 @Entity
-@Table(name = "selection")
 public class Selection extends Question{
     @ElementCollection
     @Column(name = "options")
