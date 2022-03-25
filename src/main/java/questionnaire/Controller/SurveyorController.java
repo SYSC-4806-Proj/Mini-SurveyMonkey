@@ -153,4 +153,19 @@ public class SurveyorController {
         return "userPage";
     }
 
+    @GetMapping("allSurvey")
+    public String showAllSurvey(Model model,Authentication authentication){
+
+        List<Questionnaire> allSurveys = (List<Questionnaire>) this.questionnaireRepo.findAllByOrderByIdAsc();
+        List<Questionnaire> userSurveys = this.userRepo.findByUsername(authentication.getName()).getQuestionnaire();
+
+        allSurveys.removeAll(userSurveys);
+
+        allSurveys.removeIf(Questionnaire::isClosed);
+
+        model.addAttribute("surveys",allSurveys);
+
+        return "allSurvey";
+    }
+
 }

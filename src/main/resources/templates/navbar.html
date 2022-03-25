@@ -8,7 +8,8 @@
 <body>
     <div th:fragment="bar" sec:authorize="isAuthenticated()">
         <ul id="list">
-            <li><a href="/home">Explore</a></li>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/allSurvey">Explore</a></li>
             <li><a href="/create">Create Questionnaire</a></li>
             <li><a id="name" href="/home" th:text="${#authentication.getName()}"/></li>
         </ul>

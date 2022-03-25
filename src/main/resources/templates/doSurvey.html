@@ -7,6 +7,7 @@
 </head>
 
 <body>
+    <div class=navbar th:insert="~{navbar::bar}"></div>
     <h2 th:text="${'Survey '+questionnaire.getId()+': '+questionnaire.getName()}"></h2>
     <form th:action="@{'/view/'+${questionnaire.getId()}}" th:method="post">
         <ol>
