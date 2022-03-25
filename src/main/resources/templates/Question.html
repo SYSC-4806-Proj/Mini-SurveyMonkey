@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User And Questionnaire</title>
+</head>
+<body>
+<h1 th:text="${Questionnaire.id+' : '+Questionnaire.name}"></h1>
+<ol>
+    <div th:each="question: ${Questionnaire.getQuestionList()}">
+        <li><p th:text="${question.question}"></p></li>
+        <ul>
+            <div th:each="answer:${question.getAnswers()}">
+                <li><p th:text="${answer}"></p></li>
+            </div>
+        </ul>
+    </div>
+</ol>
+</body>
+</html>
