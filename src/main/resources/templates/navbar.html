@@ -4,14 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Navigation Bar</title>
-    <link th:href="@{/static/base.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <div th:fragment="bar" class="navbar" sec:authorize="isAuthenticated()">
+    <div th:fragment="bar" sec:authorize="isAuthenticated()">
         <ul id="list">
-            <li><a href="home">Home</a></li>
-            <li><a href="/login">Login</a></li>
+            <li><a href="/home">Explore</a></li>
             <li><a href="/create">Create Questionnaire</a></li>
+            <li><a id="name" href="/home" th:text="${#authentication.getName()}"/></li>
         </ul>
     </div>
 </body>

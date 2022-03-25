@@ -19,7 +19,7 @@
         <profile>
             <id>profile1</id>
             <properties>
-                <spring.boot.mainclass>Controller.ServingWebContentApplication</spring.boot.mainclass>
+                <spring.boot.mainclass>questionnaire.ServingWebContentApplication</spring.boot.mainclass>
             </properties>
         </profile>
     </profiles>
@@ -78,6 +78,10 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
         </dependency>
     </dependencies>
 

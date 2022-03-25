@@ -1,10 +1,9 @@
-package Controller;
+package questionnaire.Controller;
 
-import Entity.*;
+import questionnaire.Entity.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,7 +1,6 @@
 package EntityTest;
 
-import Entity.OpenEnd;
-import org.checkerframework.checker.units.qual.A;
+import questionnaire.Entity.OpenEnd;
 import org.junit.Before;
 import org.junit.Test;
 

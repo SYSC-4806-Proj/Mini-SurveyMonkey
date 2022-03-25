@@ -1,6 +1,6 @@
-package Controller;
+package questionnaire.Controller;
 
-import Entity.User;
+import questionnaire.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
