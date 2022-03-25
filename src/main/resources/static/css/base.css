@@ -2,3 +2,56 @@
     font-size: 15px;
     font-family: "Helvetica", SansSerif;
 }
+
+body {
+    background-color: #f0f5f3;
+}
+
+.errorContainer{
+    text-align: center;
+    width: 300px;
+    height: 350px;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
+
+.errorMsg {
+    text-align: center;
+    font-size: 20px;
+    color: #507c70;
+}
+
+.navbar{
+    width:100%;
+    height: 60px;
+    top: 0;
+    background-color: #d2e0d9;
+    overflow: hidden;
+    position:relative;
+}
+
+ul[id="list"]{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    float: right;
+}
+
+ul[id="list"] li{
+    display: inline-block;
+}
+
+ul[id="list"] li a{
+    display: block;
+    color: #507c70;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 19px 20px;
+}
+
+ul[id="list"] li a:hover{
+    background-color: #93b9ae;
+    color: #f0f5f3;
+}

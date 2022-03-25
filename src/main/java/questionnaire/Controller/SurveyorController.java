@@ -127,13 +127,15 @@ public class SurveyorController {
     public String display(Authentication authentication, Model model){
 
         User user = this.userRepo.findByUsername(authentication.getName());
+        Boolean QNotEmpty = true;
 
         if(user.getQuestionnaire().isEmpty()){
-            return "noQuestionnaire";
+            QNotEmpty = false;
         }
 
         model.addAttribute("User", user);
         model.addAttribute("Questionnaire", user.getQuestionnaire());
+        model.addAttribute("QNotEmpty", QNotEmpty);
 
         return "userPage";
     }
