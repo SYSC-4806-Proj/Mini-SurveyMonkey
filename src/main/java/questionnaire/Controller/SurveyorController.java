@@ -1,6 +1,6 @@
-package questionnaire.Controller;
+package Controller;
 
-import questionnaire.Entity.*;
+import Entity.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,24 +85,62 @@ public class SurveyorController {
     }
 
     @RequestMapping(path = "/create", method = RequestMethod.POST)
-    public String questionnaireCreate(HttpServletRequest request) {
+    public String questionnaireCreate(HttpServletRequest request, HttpServletResponse resp, Authentication authentication) throws IOException {
         Questionnaire questionnaire = new Questionnaire();
         Map<String, String[]> formData = request.getParameterMap();
-
+        PrintWriter out = resp.getWriter();
         for (Map.Entry<String, String[]> entry : formData.entrySet()) {
+            if (entry.getKey().equals("survey_name")){
+                for(String name: entry.getValue()){
+                    if(name.equals("")){
+                        out.println("<script language='javascript'>alert('Please enter a survey name! Fill them all and submit again.')</script>");
+                        out.println("<script language='javascript'>window.location.href='/create'</script>");
+                    }
+                    else{
+                        questionnaire.setName(name);
+                    }
+                }
+            }
             if (entry.getKey().equals("open_end_question")) {
                 for (String question : entry.getValue()) {
-                    OpenEnd q = new OpenEnd();
-                    q.setQuestion(question);
-                    questionnaire.addQuestion(q);
+                    if(question.equals("")){
+                        out.println("<script language='javascript'>alert('You still have incomplete question(s). Fill them all and submit again.')</script>");
+                        out.println("<script language='javascript'>window.location.href='/create'</script>");
+                    }
+                    else{
+                        OpenEnd q = new OpenEnd();
+                        q.setQuestion(question);
+                        questionnaire.addQuestion(q);
+                    }
+                   // OpenEnd q = new OpenEnd();
+                    //q.setQuestion(question);
+                    //questionnaire.addQuestion(q);
 
                 }
             }
             else if(entry.getKey().equals("range_question")) {
                    String[] question_content = entry.getValue().clone();
                    for (int i = 0; i< question_content.length;i = i+3 ){
-                      Range q = new Range(question_content[i], Integer. valueOf(question_content[i+1]),Integer. valueOf(question_content[i+2]));
-                      questionnaire.addQuestion(q);
+                       if(question_content[i].equals("")||question_content[i+1].equals("")||question_content[i+2].equals("")){
+                           out.println("<script language='javascript'>alert('You still have incomplete question(s). Fill them all and submit again.')</script>");
+                           out.println("<script language='javascript'>window.location.href='/create'</script>");
+                       }
+                       else if ((!((question_content[i+1].matches("^[0-9]+$")) && (question_content[i+2].matches("^[0-9]+$"))))){
+                           out.println("<script language='javascript'>alert('Max boundary or Min boundary should be integer. Fill them all and submit again.')</script>");
+                           out.println("<script language='javascript'>window.location.href='/create'</script>");
+
+                       }else if(Integer. valueOf(question_content[i+1])>=Integer. valueOf(question_content[i+2])){
+                           out.println("<script language='javascript'>alert('Max boundary should larger than Min boundary. Fill them all and submit again.')</script>");
+                           out.println("<script language='javascript'>window.location.href='/create'</script>");
+                       }
+
+                       else{
+                           Range q = new Range(question_content[i], Integer. valueOf(question_content[i+1]),Integer. valueOf(question_content[i+2]));
+                           questionnaire.addQuestion(q);
+                       }
+
+                       //Range q = new Range(question_content[i], Integer. valueOf(question_content[i+1]),Integer. valueOf(question_content[i+2]));
+                      //questionnaire.addQuestion(q);
                    }
                 }
 
@@ -110,62 +148,38 @@ public class SurveyorController {
                 String[] question_content = entry.getValue().clone();
 
                 for (int i = 0;i < question_content.length;i=i+2){
-                    String[] list = question_content[i+1].split(",");
-                    List<String> l = Arrays.asList(list);
-                    Selection q = new Selection(question_content[i],l);
-                    questionnaire.addQuestion(q);
+                    if(question_content[i].equals("")||question_content[i+1].equals("")){
+                        out.println("<script language='javascript'>alert('You still have incomplete question(s). Fill them all and submit again.')</script>");
+                        out.println("<script language='javascript'>window.location.href='/create'</script>");
+                    }
+                    else{
+                        String[] list = question_content[i+1].split(",");
+                        List<String> l = Arrays.asList(list);
+                        Selection q = new Selection(question_content[i],l);
+                        questionnaire.addQuestion(q);
+                    }
+                    //String[] list = question_content[i+1].split(",");
+                    //List<String> l = Arrays.asList(list);
+                    //Selection q = new Selection(question_content[i],l);
+                    //questionnaire.addQuestion(q);
                 }
 
                 }
             }
-        questionnaireRepo.save(questionnaire);
-        long id = questionnaire.getId();
-        return "redirect:/view/" + id;
-    }
-
-    @RequestMapping(path="/display", method = RequestMethod.GET)
-    public String display(Authentication authentication, Model model){
-
+        //questionnaireRepo.save(questionnaire);
         User user = this.userRepo.findByUsername(authentication.getName());
-        Boolean QNotEmpty = true;
-
-        if(user.getQuestionnaire().isEmpty()){
-            QNotEmpty = false;
+        user.addQuestion(questionnaire);
+        this.userRepo.save(user);
+        //long id = questionnaire.getId();
+        //return "redirect:/view/" + id;
+        return "createSurvey";
         }
 
-        model.addAttribute("User", user);
-        model.addAttribute("Questionnaire", user.getQuestionnaire());
-        model.addAttribute("QNotEmpty", QNotEmpty);
-
-        return "userPage";
-    }
-
-    @RequestMapping(path="/display/{id}", method = RequestMethod.POST)
-    public String closeSurvey(@PathVariable long id, Model model, Authentication authentication){
-
-        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
-        User user = this.userRepo.findByUsername(authentication.getName());
-
-        questionnaire.setClosed(true);
-        this.questionnaireRepo.save(questionnaire);
-
+    @RequestMapping(path="/display", method = RequestMethod.GET)
+    public String display(Model model){
+        User user = new User();
         model.addAttribute("User", user);
         return "userPage";
-    }
-
-    @GetMapping("allSurvey")
-    public String showAllSurvey(Model model,Authentication authentication){
-
-        List<Questionnaire> allSurveys = (List<Questionnaire>) this.questionnaireRepo.findAllByOrderByIdAsc();
-        List<Questionnaire> userSurveys = this.userRepo.findByUsername(authentication.getName()).getQuestionnaire();
-
-        allSurveys.removeAll(userSurveys);
-
-        allSurveys.removeIf(Questionnaire::isClosed);
-
-        model.addAttribute("surveys",allSurveys);
-
-        return "allSurvey";
     }
 
 }
