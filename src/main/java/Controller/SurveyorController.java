@@ -130,9 +130,9 @@ public class SurveyorController {
         System.out.println(user.getUsername());
         System.out.println(Arrays.toString(user.getQuestionnaire().toArray()));
 
-        if(user.getQuestionnaire() == null){
-            return "noQuestionnaire";
-        }
+//        if(user.getQuestionnaire().isEmpty()){
+//            return "noQuestionnaire";
+//        }
 
         model.addAttribute("User", user);
         model.addAttribute("Questionnaire", user.getQuestionnaire());
