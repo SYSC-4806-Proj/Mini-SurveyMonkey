@@ -1,6 +1,7 @@
 package Controller;
 
 import Entity.*;
+import org.aspectj.apache.bcel.classfile.Module;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,30 +33,30 @@ public class SurveyorController {
 
 
     @GetMapping("/view/{id}")
-    public String viewQuestionnaire(@PathVariable long id, Model model){
+    public String viewQuestionnaire(@PathVariable long id, Model model) {
         Questionnaire questionnaire = this.questionnaireRepo.findById(id);
         if (questionnaire == null) {
-            model.addAttribute("error","The survey "+id+" does not exist, try another id later.");
+            model.addAttribute("error", "The survey " + id + " does not exist, try another id later.");
             return "errorRedirect";
         }
-        if(questionnaire.isClosed()){
-            model.addAttribute("error","The survey is closed, try another id later.");
+        if (questionnaire.isClosed()) {
+            model.addAttribute("error", "The survey is closed, try another id later.");
             return "errorRedirect";
         }
         model.addAttribute("questionnaire", questionnaire);
         List<Long> openEndIdList = new ArrayList<>();
         List<Long> rangeIdList = new ArrayList<>();
         List<Long> selectionIdList = new ArrayList<>();
-        for(Question question:questionnaire.getQuestionList()){
-            if(question instanceof OpenEnd){
+        for (Question question : questionnaire.getQuestionList()) {
+            if (question instanceof OpenEnd) {
                 openEndIdList.add(question.getId());
-            }else if(question instanceof Range){
+            } else if (question instanceof Range) {
                 rangeIdList.add(question.getId());
-            }else if(question instanceof Selection){
+            } else if (question instanceof Selection) {
                 selectionIdList.add(question.getId());
             }
         }
-        model.addAttribute("openEndList",openEndIdList);
+        model.addAttribute("openEndList", openEndIdList);
         model.addAttribute("rangeList", rangeIdList);
         model.addAttribute("selectionList", selectionIdList);
         return "doSurvey";
@@ -65,17 +66,17 @@ public class SurveyorController {
     public String submitSurveyAnswer(@PathVariable long id, String[] answer, Model model, HttpServletResponse resp) throws IOException {
         Questionnaire questionnaire = this.questionnaireRepo.findById(id);
         PrintWriter out = resp.getWriter();
-        if(questionnaire == null){
+        if (questionnaire == null) {
             return null;
         }
-        for(int i = 0; i < answer.length; i++){
-            if(answer[i].equals("")){
+        for (int i = 0; i < answer.length; i++) {
+            if (answer[i].equals("")) {
                 out.println("<script language='javascript'>alert('You still have incomplete question(s). Fill them all and submit again.')</script>");
-                out.println("<script language='javascript'>window.location.href='/view/"+id+"'</script>");
+                out.println("<script language='javascript'>window.location.href='/view/" + id + "'</script>");
             }
         }
         int i = 0;
-        for(Question question:questionnaire.getQuestionList()){
+        for (Question question : questionnaire.getQuestionList()) {
             question.addAnswer(answer[i]);
             i++;
         }
@@ -96,55 +97,76 @@ public class SurveyorController {
                     questionnaire.addQuestion(q);
 
                 }
-            }
-            else if(entry.getKey().equals("range_question")) {
-                   String[] question_content = entry.getValue().clone();
-                   for (int i = 0; i< question_content.length;i = i+3 ){
-                      Range q = new Range(question_content[i], Integer. valueOf(question_content[i+1]),Integer. valueOf(question_content[i+2]));
-                      questionnaire.addQuestion(q);
-                   }
+            } else if (entry.getKey().equals("range_question")) {
+                String[] question_content = entry.getValue().clone();
+                for (int i = 0; i < question_content.length; i = i + 3) {
+                    Range q = new Range(question_content[i], Integer.valueOf(question_content[i + 1]), Integer.valueOf(question_content[i + 2]));
+                    questionnaire.addQuestion(q);
                 }
-
-            else if(entry.getKey().equals("selection_question")){
+            } else if (entry.getKey().equals("selection_question")) {
                 String[] question_content = entry.getValue().clone();
 
-                for (int i = 0;i < question_content.length;i=i+2){
-                    String[] list = question_content[i+1].split(",");
+                for (int i = 0; i < question_content.length; i = i + 2) {
+                    String[] list = question_content[i + 1].split(",");
                     List<String> l = Arrays.asList(list);
-                    Selection q = new Selection(question_content[i],l);
+                    Selection q = new Selection(question_content[i], l);
                     questionnaire.addQuestion(q);
                 }
 
-                }
             }
+        }
         questionnaireRepo.save(questionnaire);
         long id = questionnaire.getId();
         return "redirect:/view/" + id;
-        }
+    }
 
-    @RequestMapping(path="/display", method = RequestMethod.GET)
-    public String display(Model model){
+    @RequestMapping(path = "/display", method = RequestMethod.GET)
+    public String display(Model model) {
         User user = new User();
         model.addAttribute("User", user);
         return "userPage";
     }
 
-    @RequestMapping(path="/result", method = RequestMethod.GET)
-    public String displayQuestion(@PathVariable long id, Model model){
-       Questionnaire questionnaire=this.questionnaireRepo.findById(id);
-
-        if(questionnaire.getQuestionList() == null){
+    @RequestMapping(path = "/result/{id}", method = RequestMethod.GET)
+    public String displayQuestion(@PathVariable long id, Model model) {
+        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
+        System.out.println(questionnaire.getId() + "**************************");
+        if (questionnaire.getQuestionList().isEmpty()) {
+            System.out.println("EMPTY");
+            model.addAttribute("error", "The survey " + id + " does not exist, try another questionnaire later.");
             return "noQuestion";
+        } else {
+            System.out.println("Not Empty");
+            model.addAttribute("Questionnaire", questionnaire);
+            return "Question";
         }
 
-        model.addAttribute("Questionnaire", questionnaire);
-
-
-        return "Question";
     }
 
+    @RequestMapping(path = "/result{id}", method = RequestMethod.GET)
+    public String displayAnswer(@PathVariable long id, Model model) {
+        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
 
+        if (questionnaire.getQuestionList() == null) {
+            model.addAttribute("error", "The survey " + id + " does not exist, try another questionnaire later.");
+            return "noQuestion";
+        } else {
+            model.addAttribute("Questionnaire", questionnaire);
+            List<OpenEnd> openEndAnswer = new ArrayList<>();
+            List<Range> rangeAnswer = new ArrayList<>();
+            List<Selection> selectionAnswer = new ArrayList<>();
+            for (Question question: questionnaire.getQuestionList()){
+                if(question instanceof OpenEnd){
+                    openEndAnswer.add((OpenEnd) question);
+                }else if(question instanceof Range){
+                    rangeAnswer.add((Range) question);
+                }else if(question instanceof Selection){
+                    selectionAnswer.add((Selection) question);
+                }
+            }
+            return "Question";
 
+        }
 
-
+    }
 }

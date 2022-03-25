@@ -5,13 +5,16 @@
     <title>User And Questionnaire</title>
 </head>
 <body>
-<p th:text="${Questionnaire.id}"></p>
-<table id="userQuestions">
-    <tr th:each="Question: ${Questionnaire.getQuestionList()}">
-        <td th:text="${Question.question}"></td>
-        <td th:if = "not ${Question.getAnswers()}"><form th:action="@{'/result/' + ${Question.id}}" method="post" ><input type=submit value="Close"></form></td>
-        <td th:if = "${Question.getAnswers()}"><a href="/"><input type=button value="Answer"></a></td>
-    </tr>
-</table>
+<h1 th:text="${Questionnaire.id+' : '+Questionnaire.name}"></h1>
+<ol>
+    <div th:each="question: ${Questionnaire.getQuestionList()}">
+        <li><p th:text="${question.question}"></p></li>
+        <ul>
+            <div th:each="answer:${question.getAnswers()}">
+                <li><p th:text="${answer}"></p></li>
+            </div>
+        </ul>
+    </div>
+</ol>
 </body>
 </html>
