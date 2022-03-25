@@ -129,4 +129,22 @@ public class SurveyorController {
         return "userPage";
     }
 
+    @RequestMapping(path="/result", method = RequestMethod.GET)
+    public String displayQuestion(@PathVariable long id, Model model){
+       Questionnaire questionnaire=this.questionnaireRepo.findById(id);
+
+        if(questionnaire.getQuestionList() == null){
+            return "noQuestion";
+        }
+
+        model.addAttribute("Questionnaire", questionnaire);
+
+
+        return "Question";
+    }
+
+
+
+
+
 }

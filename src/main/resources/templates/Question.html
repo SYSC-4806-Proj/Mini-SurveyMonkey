@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User And Questionnaire</title>
+</head>
+<body>
+<p th:text="${Questionnaire.id}"></p>
+<table id="userQuestions">
+    <tr th:each="Question: ${Questionnaire.getQuestionList()}">
+        <td th:text="${Question.question}"></td>
+        <td th:if = "not ${Question.getAnswers()}"><form th:action="@{'/result/' + ${Question.id}}" method="post" ><input type=submit value="Close"></form></td>
+        <td th:if = "${Question.getAnswers()}"><a href="/"><input type=button value="Answer"></a></td>
+    </tr>
+</table>
+</body>
+</html>
