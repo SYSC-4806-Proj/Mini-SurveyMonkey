@@ -1,7 +1,6 @@
 package EntityTest;
 
-import Entity.Selection;
-import org.checkerframework.checker.units.qual.A;
+import questionnaire.Entity.Selection;
 import org.junit.Before;
 import org.junit.Test;
 

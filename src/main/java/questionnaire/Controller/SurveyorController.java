@@ -1,6 +1,6 @@
-package Controller;
+package questionnaire.Controller;
 
-import Entity.*;
+import questionnaire.Entity.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

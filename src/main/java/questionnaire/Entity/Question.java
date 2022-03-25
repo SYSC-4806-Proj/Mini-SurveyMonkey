@@ -1,4 +1,4 @@
-package Entity;
+package questionnaire.Entity;
 
 import javax.persistence.*;
 import java.util.List;

@@ -1,7 +1,10 @@
 <!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{../static/css/navbar.css}" rel="stylesheet" type="text/css" href="css/navbar.css"/>
+    <link th:href="@{../static/css/base.css}" type="text/css" rel="stylesheet"/>
 </head>
 <script>
     function viewFunction(){
@@ -12,11 +15,14 @@
     }
 </script>
 <body>
+    <div class=navbar th:insert="~{navbar::bar}"></div>
+    <p>Welcome, <span th:text="${username}"></span>!</p>
     <p>Create Questionnaire <a href="/create">here</a></p>
     <p>Check My Questionnaire <a href="/display">here</a></p>
     <form id="view-form" method="get" onsubmit="viewFunction()">
         Find Questionnaire to Answer: <input type="number" name="id">
         <input type="submit" value="View Questionnaire">
     </form>
+
 </body>
 </html>

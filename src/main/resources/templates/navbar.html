@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Navigation Bar</title>
+</head>
+<body>
+    <div th:fragment="bar" sec:authorize="isAuthenticated()">
+        <ul id="list">
+            <li><a href="/home">Explore</a></li>
+            <li><a href="/create">Create Questionnaire</a></li>
+            <li><a id="name" href="/home" th:text="${#authentication.getName()}"/></li>
+        </ul>
+    </div>
+</body>
+</html>

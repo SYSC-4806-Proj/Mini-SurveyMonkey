@@ -1,11 +1,9 @@
-package Controller;
+package questionnaire.Controller;
 
-import Entity.User;
+import questionnaire.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.stereotype.Repository;
 
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
 public interface UserRepo extends JpaRepository<User, Long> {
