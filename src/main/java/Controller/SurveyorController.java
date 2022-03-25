@@ -1,6 +1,7 @@
 package Controller;
 
 import Entity.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -120,11 +121,34 @@ public class SurveyorController {
         questionnaireRepo.save(questionnaire);
         long id = questionnaire.getId();
         return "redirect:/view/" + id;
-        }
+    }
 
     @RequestMapping(path="/display", method = RequestMethod.GET)
-    public String display(Model model){
-        User user = new User();
+    public String display(Authentication authentication, Model model){
+
+        User user = this.userRepo.findByUsername(authentication.getName());
+        System.out.println(user.getUsername());
+        System.out.println(Arrays.toString(user.getQuestionnaire().toArray()));
+
+        if(user.getQuestionnaire() == null){
+            return "noQuestionnaire";
+        }
+
+        model.addAttribute("User", user);
+        model.addAttribute("Questionnaire", user.getQuestionnaire());
+
+        return "userPage";
+    }
+
+    @RequestMapping(path="/display/{id}", method = RequestMethod.POST)
+    public String closeSurvey(@PathVariable long id, Model model, Authentication authentication){
+
+        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
+        User user = this.userRepo.findByUsername(authentication.getName());
+
+        questionnaire.setClosed(true);
+        this.questionnaireRepo.save(questionnaire);
+
         model.addAttribute("User", user);
         return "userPage";
     }
