@@ -4,29 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link th:href="@{../static/css/base.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{../static/css/auth.css}" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-    <div th:if="${param.error}">
-        Invalid username and password
-    </div>
-    <div th:if="${param.logout}">
-        You have been logged out
-    </div>
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label>User Name: </label>
-            <input type="text" name="username"/>
+    <div class="wrapper">
+        <div id="formContent">
+            <h2 class="active">Sign In</h2>
+            <a class="inactive underlineHover" href="/register">Sign Up</a>
+            <div class="loginError" th:if="${param.error}">
+                <h3>Invalid username and password</h3>
+            </div>
+            <form th:action="@{/login}" method="post">
+                <input type="text" name="username" class="fadeIn first" placeholder="username"/>
+                <input type="password" name="password" class="fadeIn second" placeholder="password">
+                <input type="submit" value="Log In" class="fadeIn third"/>
+            </form>
         </div>
-        <div>
-            <label>Password: </label>
-            <input type="password" name="password">
-        </div>
-        <div>
-            <input type="submit" value="Sign In"/>
-        </div>
-    </form>
-    <div>
-        <p>If doesn't have an account yet, <a href="/register">click</a> to register</p>
     </div>
 </body>
 </html>

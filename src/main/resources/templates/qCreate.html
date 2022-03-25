@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Questionnaire Create</title>
-
-
+    <link th:href="@{../static/css/base.css}" type="text/css" rel="stylesheet"/>
     <script>
         function add_OpenEnd_Fields() {
             var newFields = document.getElementById('open_end').cloneNode(true)

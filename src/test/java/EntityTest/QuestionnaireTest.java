@@ -1,6 +1,6 @@
 package EntityTest;
 
-import Entity.*;
+import questionnaire.Entity.*;
 import org.junit.Before;
 import org.junit.Test;
 

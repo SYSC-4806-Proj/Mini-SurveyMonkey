@@ -1,6 +1,5 @@
-package Entity;
+package questionnaire.Entity;
 
-import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import java.util.ArrayList;

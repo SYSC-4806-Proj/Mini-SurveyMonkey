@@ -1,6 +1,6 @@
 package EntityTest;
 
-import Entity.Range;
+import questionnaire.Entity.Range;
 import org.junit.Test;
 
 import java.util.ArrayList;

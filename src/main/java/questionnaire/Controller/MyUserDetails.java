@@ -1,14 +1,9 @@
-package Controller;
+package questionnaire.Controller;
 
-import Entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import questionnaire.Entity.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.Arrays;
 import java.util.Collection;
 
 public class MyUserDetails implements UserDetails{

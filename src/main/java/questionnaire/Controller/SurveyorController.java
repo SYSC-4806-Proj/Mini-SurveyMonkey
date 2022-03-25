@@ -1,7 +1,8 @@
-package Controller;
+package questionnaire.Controller;
 
-import Entity.*;
-import org.aspectj.apache.bcel.classfile.Module;
+
+import questionnaire.Entity.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -120,12 +121,37 @@ public class SurveyorController {
         return "redirect:/view/" + id;
     }
 
-    @RequestMapping(path = "/display", method = RequestMethod.GET)
-    public String display(Model model) {
-        User user = new User();
+
+    @RequestMapping(path="/display", method = RequestMethod.GET)
+    public String display(Authentication authentication, Model model){
+
+        User user = this.userRepo.findByUsername(authentication.getName());
+        Boolean QNotEmpty = true;
+
+        if(user.getQuestionnaire().isEmpty()){
+            QNotEmpty = false;
+        }
+
+        model.addAttribute("User", user);
+        model.addAttribute("Questionnaire", user.getQuestionnaire());
+        model.addAttribute("QNotEmpty", QNotEmpty);
+
+        return "userPage";
+    }
+
+    @RequestMapping(path="/display/{id}", method = RequestMethod.POST)
+    public String closeSurvey(@PathVariable long id, Model model, Authentication authentication){
+
+        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
+        User user = this.userRepo.findByUsername(authentication.getName());
+
+        questionnaire.setClosed(true);
+        this.questionnaireRepo.save(questionnaire);
+
         model.addAttribute("User", user);
         return "userPage";
     }
+
 
     @RequestMapping(path = "/result/{id}", method = RequestMethod.GET)
     public String displayQuestion(@PathVariable long id, Model model) {
@@ -168,5 +194,20 @@ public class SurveyorController {
 
         }
 
+    }
+
+    @GetMapping("allSurvey")
+    public String showAllSurvey(Model model,Authentication authentication){
+
+        List<Questionnaire> allSurveys = (List<Questionnaire>) this.questionnaireRepo.findAllByOrderByIdAsc();
+        List<Questionnaire> userSurveys = this.userRepo.findByUsername(authentication.getName()).getQuestionnaire();
+
+        allSurveys.removeAll(userSurveys);
+
+        allSurveys.removeIf(Questionnaire::isClosed);
+
+        model.addAttribute("surveys",allSurveys);
+
+        return "allSurvey";
     }
 }
