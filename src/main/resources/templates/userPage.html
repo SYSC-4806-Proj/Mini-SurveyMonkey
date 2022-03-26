@@ -6,16 +6,19 @@
     <link th:href="@{../static/css/base.css}" type="text/css" rel="stylesheet"/>
 </head>
 <body>
+    <div class=navbar th:insert="~{navbar::bar}"></div>
+
     <div th:if="${QNotEmpty}" >
-        <p th:text="${User.id}"></p>
+        <p th:text="${User.getUsername()}"></p>
         <table id="userQuestionnaire">
             <tr th:each="Survey : ${User.questionnaire}">
-                <td th:text="${Survey.id}"></td>
+                <td th:text="${Survey.name}"></td>
                 <td th:if = "not ${Survey.isClosed()}"><form th:action="@{'/display/' + ${Survey.id}}" method="post" path="/display/{id}"><input type=submit value="Close"></form></td>
-                <td th:if = "${Survey.isClosed()}"><a href="/home"><input type=button value="Result"></a></td>
+                <td th:if = "${Survey.isClosed()}"><a th:href="@{'/result/' + ${Survey.id}}"><input type=button value="Result"></a></td>
             </tr>
         </table>
     </div>
+
     <div class="errorContainer" th:if="${not QNotEmpty}">
         <p class="errorMsg">You have no questionnaire, <a class="errorMsg" href="/home">click</a> to return home page</p>
     </div>
