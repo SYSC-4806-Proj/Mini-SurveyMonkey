@@ -198,7 +198,7 @@ public class SurveyorController {
         this.questionnaireRepo.save(questionnaire);
 
         model.addAttribute("User", user);
-        return "userPage";
+        return "redirect:/display";
     }
 
     @RequestMapping(path = "/result/{id}", method = RequestMethod.GET)
