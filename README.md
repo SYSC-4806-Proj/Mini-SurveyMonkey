@@ -98,7 +98,7 @@ ShiZhong Shang
 3. Redirect to the result page: once the questionnaire is closed, the display result button would be available. And the result button would redirect the users to the result page.
 
 Jiatong Han
-1. Generate the result: the function need the surveyor's id in advance.
+1. Generate the result: the function need the question's id in advance.
 2. Create Result Function: Generate results of the questions' answers from database once the questionnaire is closed. The results are ordered by the question id.
 3. Find the API to convert the results of selection questions and range questions to diagram and pie chart separately.
 
