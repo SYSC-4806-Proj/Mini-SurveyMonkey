@@ -5,16 +5,22 @@
     <title>User And Questionnaire</title>
 </head>
 <body>
-<h1 th:text="${Questionnaire.id+' : '+Questionnaire.name}"></h1>
-<ol>
-    <div th:each="question: ${Questionnaire.getQuestionList()}">
-        <li><p th:text="${question.question}"></p></li>
-        <ul>
-            <div th:each="answer:${question.getAnswers()}">
-                <li><p th:text="${answer}"></p></li>
-            </div>
-        </ul>
-    </div>
-</ol>
+<div th:if="${isEmpty}">
+    <h1>You have no question, please go back to the main page!</h1>
+    <input type=button value="Main Page"><a th:href="@{/home}"></a>
+</div>
+<div th:if="${not isEmpty}">
+    <h1 th:text="${Questionnaire.id+' : '+Questionnaire.name}"></h1>
+    <ol>
+        <div th:each="question: ${Questionnaire.getQuestionList()}">
+            <li><p th:text="${question.question}"></p></li>
+            <ul>
+                <div th:each="answer:${question.getAnswers()}">
+                    <li><p th:text="${answer}"></p></li>
+                </div>
+            </ul>
+        </div>
+    </ol>
+</div>
 </body>
 </html>
