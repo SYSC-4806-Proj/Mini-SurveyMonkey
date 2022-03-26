@@ -172,8 +172,31 @@ public class SurveyorController {
         }
 
     @RequestMapping(path="/display", method = RequestMethod.GET)
-    public String display(Model model){
-        User user = new User();
+    public String display(Authentication authentication, Model model){
+
+        User user = this.userRepo.findByUsername(authentication.getName());
+        Boolean QNotEmpty = true;
+
+        if(user.getQuestionnaire().isEmpty()){
+            QNotEmpty = false;
+        }
+
+        model.addAttribute("User", user);
+        model.addAttribute("Questionnaire", user.getQuestionnaire());
+        model.addAttribute("QNotEmpty", QNotEmpty);
+
+        return "userPage";
+    }
+
+    @RequestMapping(path="/display/{id}", method = RequestMethod.POST)
+    public String closeSurvey(@PathVariable long id, Model model, Authentication authentication){
+
+        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
+        User user = this.userRepo.findByUsername(authentication.getName());
+
+        questionnaire.setClosed(true);
+        this.questionnaireRepo.save(questionnaire);
+
         model.addAttribute("User", user);
         return "userPage";
     }
