@@ -21,7 +21,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Questionnaire> questionnaire = new ArrayList<>();
 
     public User() {
