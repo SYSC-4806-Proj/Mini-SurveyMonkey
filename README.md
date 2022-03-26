@@ -56,7 +56,17 @@ has been break into four parts: front-end (templates), Controller, Backend(Entit
 
 ### Milestone 2 (Deadline: March 25th, 2022)
 
- <hr style="border-top: dotted 2px;" />
+For Milestone 2, our team developed most of the basic functionalities and features of the Mini-SurveyMonkey. And now, the system has the following features:
+<ul>
+<li>Users can sign up and login into our system now. And the user management system would ensure the security of each user.</li>
+<li>Users can create a questionnaire after login. They can also add three type of questions as many as they need.</li>
+<li>Users can explore all questionnaires which are not closed and not created by the current user</li>
+<li>Users can search and complete a questionnaire by entering questionnaire id.</li>
+<li>Users can check all questionnaires created by themselves and close any of their questionnaire.</li>
+<li>After the user closed one of their questionnaire, they can see the results of the questionnaire.</li>
+<li>Currently, the results of each survey question are still shown in text format.</li>
+<li>Developed css for some pages.</li>
+</ul>
 
 ### Milestone 3 (Deadline: April 8th, 2022)
 
@@ -65,42 +75,41 @@ has been break into four parts: front-end (templates), Controller, Backend(Entit
 
 ## Future Plan
  <ul>
- <li>Complete the templates and the functionality</li>
- <li>Add user authentication process (login, sign up, logout)</li>
- <li>Add ability to delete the surveys.</li>
- <li>Add rendering effects on each template, includes applying CSS and JavaScript to the templates.</li>
+ <li>Generate histograms and pie charts for selection and range questions separately.</li>
+ <li>Add more CSS styles to HTML files</li>
+ <li>Optimize the HTML redirects</li>
  </ul>
 
  <hr>
 
 ## Contributing
 Ruixuan Ni
-1. Developed the whole project structure
-2. Home page : sign up and login. After the user is logged in, the users would be lead to the operation page for further operation.
-3. Develop the user login management system
+1. Developed the whole project structure [DONE]
+2. Home page : sign up and login. After the user is logged in, the users would be lead to the operation page for further operation. [DONE]
+3. Develop the user login management system [DONE]
 
 TianTian Lin
-1. Create Function: create questionnaire after login
-2. Create Function: add three optional questions type buttons. Allow surveyor to create their own questions, have the minimum and maximum for range questions and options for selection questions.
-3. Create Function: after create, return to the display page with the generated questionnaire id.
-4. Save the three type of questions in each questionnaire into the database.
+1. Create Function: create questionnaire after login [DONE]
+2. Create Function: add three optional questions type buttons. Allow surveyor to create their own questions, have the minimum and maximum for range questions and options for selection questions. [DONE]
+3. Create Function: after create, return to home page for further operation. [DONE]
+4. Save the three type of questions in each questionnaire into the database. [DONE]
 
 Jiawei Ma
-1. Search Function: one user ID only can fill the questionnaire once,
-2. Search Function: after submit the questionnaire, return to user page, user can select the next step.
-3. Create model objects under Entity folder, and add JUnit tests for models.
-4. Generate database based on the models.
-5. Deploy the database to Heroku Postgres, and deploy the system to CircleCI and Heroku.
+1. Search Function: one user ID only can fill the questionnaire once. [doing]
+2. Search Function: after submit the questionnaire, return to home page, user can select the next step. [DONE]
+3. Create model objects under Entity folder, and add JUnit tests for models. [DONE]
+4. Generate database based on the models. [Re-modified and DONE]
+5. Deploy the database to Heroku Postgres, and deploy the system to CircleCI and Heroku.[Re-modified and DONE]
 
 ShiZhong Shang
-1. Create Display page and function: surveyors can see the questionnaires created by themselves
-2. Close Questionnaire Function: Surveyors can close the questionnaire in the Display page at any time.
-3. Redirect to the result page: once the questionnaire is closed, the display result button would be available. And the result button would redirect the users to the result page.
+1. Create Display page and function: surveyors can see the questionnaires created by themselves [DONE]
+2. Close Questionnaire Function: Surveyors can close the questionnaire in the Display page at any time. [DONE]
+3. Redirect to the result page: once the questionnaire is closed, the display result button would be available. And the result button would redirect the users to the result page. [DONE]
 
 Jiatong Han
-1. Generate the result: the function need the question's id in advance.
-2. Create Result Function: Generate results of the questions' answers from database once the questionnaire is closed. The results are ordered by the question id.
-3. Find the API to convert the results of selection questions and range questions to diagram and pie chart separately.
+1. Generate the result: the function need the question's id in advance. [DONE]
+2. Create Result Function: Generate results of the questions' answers from database once the questionnaire is closed. The results are ordered by the question id. [DONE]
+3. Find the API to convert the results of selection questions and range questions to diagram and pie chart separately. [Incomplete]
 
 ## Diagrams
 ### Database Schema Diagram
