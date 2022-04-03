@@ -198,25 +198,24 @@ public class SurveyorController {
         this.questionnaireRepo.save(questionnaire);
 
         model.addAttribute("User", user);
-        return "userPage";
+        return "redirect:/display";
     }
 
     @RequestMapping(path = "/result/{id}", method = RequestMethod.GET)
     public String displayQuestion(@PathVariable long id, Model model) {
         Questionnaire questionnaire = this.questionnaireRepo.findById(id);
-        System.out.println(questionnaire.getId() + "**************************");
+        boolean isEmpty = false;
         if (questionnaire.getQuestionList().isEmpty()) {
-            System.out.println("EMPTY");
-            model.addAttribute("error", "The survey " + id + " does not exist, try another questionnaire later.");
-            return "noQuestion";
+            isEmpty = true;
         } else {
             System.out.println("Not Empty");
             model.addAttribute("Questionnaire", questionnaire);
-            return "Question";
         }
-
+        model.addAttribute("isEmpty", isEmpty);
+        return "Question";
     }
 
+    /*
     @RequestMapping(path = "/result{id}", method = RequestMethod.GET)
     public String displayAnswer(@PathVariable long id, Model model) {
         Questionnaire questionnaire = this.questionnaireRepo.findById(id);
@@ -239,10 +238,9 @@ public class SurveyorController {
                 }
             }
             return "Question";
-
         }
-
     }
+    */
 
     @GetMapping("allSurvey")
     public String showAllSurvey(Model model,Authentication authentication){
