@@ -1,12 +1,51 @@
 @import "animation.css";
 
-div {
+div[id="content"]{
     position: relative;
-    padding: 50px;
+    margin-top: 10%;
+    margin-left: -50%;
+    width: 50%;
+    animation-duration: 4s;
+    animation-name: slideIn;
+    animation-fill-mode: forwards;
+}
+
+div[id="content2"]{
+    position:relative;
+    margin-top:30px;
+    margin-left: -50%;
+    animation-delay: 0.5s;
+    animation-duration: 4s;
+    animation-name: slideIn;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        margin-left: -50%;
+    }
+    to {
+        opacity: 1;
+        margin-left: 5%;
+    }
 }
 
 h1 {
-    font-size: 30px;
+    font-size: 50px;
     font-weight: bold;
-    font-family: "Adobe 黑体 Std R";
+}
+
+a{
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    background-color: #507c70;
+    font-size: 23px;
+    text-decoration: none;
+    color: #d2e0d9;
+}
+
+a:hover{
+    background-color: #93b9ae;
+    color: #f0f5f3;
 }
