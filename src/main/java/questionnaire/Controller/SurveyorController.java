@@ -215,32 +215,33 @@ public class SurveyorController {
         return "Question";
     }
 
-    /*
-    @RequestMapping(path = "/result{id}", method = RequestMethod.GET)
-    public String displayAnswer(@PathVariable long id, Model model) {
-        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
 
-        if (questionnaire.getQuestionList() == null) {
-            model.addAttribute("error", "The survey " + id + " does not exist, try another questionnaire later.");
-            return "noQuestion";
-        } else {
-            model.addAttribute("Questionnaire", questionnaire);
-            List<OpenEnd> openEndAnswer = new ArrayList<>();
-            List<Range> rangeAnswer = new ArrayList<>();
-            List<Selection> selectionAnswer = new ArrayList<>();
-            for (Question question: questionnaire.getQuestionList()){
+    @RequestMapping(path = "/result/{id}/answers", method = RequestMethod.GET)
+    public String displayAnswers(@PathVariable long id, Model model) {
+        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
+        List<Question> questions = questionnaire.getQuestionList();
+        List<OpenEnd> openEndsQuestion = new ArrayList<>();
+        List<Range> rangeQuestion = new ArrayList<>();
+        List<Selection> selectionQuestion = new ArrayList<>();
+
+        for (Question question : questions) {
                 if(question instanceof OpenEnd){
-                    openEndAnswer.add((OpenEnd) question);
-                }else if(question instanceof Range){
-                    rangeAnswer.add((Range) question);
+                    openEndsQuestion.add((OpenEnd) question);
+                }else if(question instanceof  Range){
+                    rangeQuestion.add((Range) question);
                 }else if(question instanceof Selection){
-                    selectionAnswer.add((Selection) question);
+                    selectionQuestion.add((Selection) question);
                 }
             }
-            return "Question";
-        }
+        model.addAttribute("openEndQuestionList",openEndsQuestion);
+        model.addAttribute("rangeQuestionList",rangeQuestion);
+        model.addAttribute("selectionQuestionList",selectionQuestion);
+
+        return "Question";
     }
-    */
+
+
+
 
     @GetMapping("allSurvey")
     public String showAllSurvey(Model model,Authentication authentication){
@@ -253,7 +254,6 @@ public class SurveyorController {
         allSurveys.removeIf(Questionnaire::isClosed);
 
         model.addAttribute("surveys",allSurveys);
-
         return "allSurvey";
     }
 }
