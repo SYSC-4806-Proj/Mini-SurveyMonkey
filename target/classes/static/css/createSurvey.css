@@ -1,0 +1,52 @@
+*{
+    font-size: 15px;
+    font-family: "Helvetica", SansSerif;
+}
+body {
+    background-color: #f0f5f3;
+}
+label{
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+}
+
+h1{
+    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display:inline-block;
+    margin: 40px 8px 10px 8px;
+    color: #507c70;
+}
+button{
+    border: transparent;
+    padding: 5px 10px;
+    -webkit-border-radius: 5px;
+    border-radius: 28px;
+    color: #ffffff;
+    background: #507c70;
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-box-shadow: 0 10px 30px 0 rgba(43,110,110,0.4);
+    box-shadow: 0 10px 30px 0 rgba(43,110,110,0.4);
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    margin: 5px 20px 40px 20px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type=button]:hover {
+    background: #93b9ae;
+}
+div{
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
