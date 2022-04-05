@@ -15,7 +15,7 @@
 </script>
 <body>
     <div class=navbar th:insert="~{navbar::bar}"></div>
-    <h2>Welcome, <span th:text="${username}"></span>!</h2>
+    <h2>Welcome, <span th:text="${username}"></span>! <a href="/logout">logout</a></h2>
     <p>Create Questionnaire <a href="/create">here</a></p>
     <p>Check My Questionnaire <a href="/display">here</a></p>
     <form id="view-form" method="get" onsubmit="viewFunction()">
