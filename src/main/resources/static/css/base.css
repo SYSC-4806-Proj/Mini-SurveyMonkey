@@ -43,6 +43,7 @@ ul[id="list"] li{
 }
 
 ul[id="list"] li a{
+    font-weight: bold;
     display: block;
     color: #507c70;
     text-align: center;
