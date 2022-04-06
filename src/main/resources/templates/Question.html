@@ -5,44 +5,49 @@
     <title>User And Questionnaire</title>
 </head>
 
-    <script>
-        var questions = [[${Questionnaire.getQuestionList()}]];
-        for (var i = 0; i < questions; i++) {
-            if (questions[i] instanceof Selection) {
-                var xValues = [questions[i].getOptions()];
-                for (var j = 0; j < xValues[i]; j++) {
-                    var yValues = [questions[i].getAnswers()].filter(yValues => yValues == xValues[i]).length
-                }
-                new Chart("myChart", {
-                    type: "pie",
-                    data: {
-                        labels: xValues,
-                        database: [{
-                            backgroundColor: barColors,
-                            data: yValues,
-                        }]
-                    },
-                    options: {
-                        title: {
-                            display: true,
-                            text: "Selection Question"
-                        }
-                    }
-                })
-            } else if (questions[i] instanceof Range) {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<body>
 
-
+<canvas id="myChart" height="300" width="300"></canvas>
+<script>
+    var questions = [[${Questionnaire.getQuestionList()}]];
+    var barColors = ["red", "green","blue","orange","brown"];
+    for (var i = 0; i < questions; i++) {
+        if (questions[i] instanceof Selection) {
+            var xValues = [questions[i].getOptions()];
+            var yValues = []
+            for (var j = 0; j < questions[i].getOptions(); j++) {
+                yValues[j] = [questions[i].getAnswers()].filter(function (x){
+                    return x === xValues[j]
+                }).length
             }
-
+            console.log(xValues)
+            console.log(yValues)
+            new Chart("myChart", {
+                type: "pie",
+                data: {
+                    labels: xValues,
+                    database: [{
+                        backgroundColor: barColors,
+                        data: yValues,
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "Selection Question"
+                    }
+                }
+            })
+        } else if (questions[i] instanceof Range) {
 
 
         }
-    </script>
-<body>
 
-<canvas id="myCanvas" height="300" width="300">
 
-</canvas>
+
+    }
+</script>
 <div th:if="${isEmpty}">
     <h1>You have no question, please go back to the main page!</h1>
     <input type=button value="Main Page"><a th:href="@{/home}"></a>
