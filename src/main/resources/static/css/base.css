@@ -43,12 +43,13 @@ ul[id="list"] li{
 }
 
 ul[id="list"] li a{
+    font-weight: bold;
     display: block;
     color: #507c70;
     text-align: center;
     text-decoration: none;
     font-size: 17px;
-    padding: 19px 20px;
+    padding: 20px 20px;
     transition: all 0.5s ease-out;
 }
 

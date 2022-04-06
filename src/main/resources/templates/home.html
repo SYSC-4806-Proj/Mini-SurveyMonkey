@@ -4,6 +4,7 @@
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link th:href="@{../static/css/base.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{../static/css/home.css}" type="text/css" rel="stylesheet"/>
 </head>
 <script>
     function viewFunction(){
@@ -15,13 +16,33 @@
 </script>
 <body>
     <div class=navbar th:insert="~{navbar::bar}"></div>
-    <h2>Welcome, <span th:text="${username}"></span>! <a href="/logout">logout</a></h2>
-    <p>Create Questionnaire <a href="/create">here</a></p>
-    <p>Check My Questionnaire <a href="/display">here</a></p>
-    <form id="view-form" method="get" onsubmit="viewFunction()">
-        Find Questionnaire to Answer: <input type="number" name="id">
-        <input type="submit" value="View Questionnaire">
-    </form>
-
+    <div class="content">
+        <div class="welcome">
+            <h2>Welcome, <span th:text="${username}"></span>!  <a href="/logout">logout</a></h2>
+        </div>
+        <div class="container">
+            <div class="function" id="f1">
+                <a href="/display">Manage My Questionnaires</a>
+            </div>
+            <div class="function" id="f2">
+                <a href="/create">New Questionnaire</a>
+            </div>
+            <div class="function" id="f3">
+                <form id="view-form" method="get" onsubmit="viewFunction()">
+                    <div id="icon">
+                        <img src="../static/image/search_icon.png"/>
+                    </div>
+                    <div id="search_form">
+                        <label>
+                            <input type="number" name="id" placeholder="Questionnaire ID" min="0" required>
+                        </label>
+                        <label>
+                            <input type="submit" value="View Questionnaire" >
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
