@@ -36,7 +36,7 @@ clone the project to your local directory
 2. When the project is open, the workspace should using Maven and Java 8. IntelliJ will automatically help uou to select your sdk and to import Maven.
 3. Find the Maven tab on the right, click on SYSC4806->Lifecycle->Package. This will compile a build that is able to run.
 4. Now we can run our project by clicking Run->main
-### Run Remotely:
+### Access Remotely:
 Click this URL:
  
   [https://mini-survey-monkey18.herokuapp.com/](https://mini-survey-monkey18.herokuapp.com/)
