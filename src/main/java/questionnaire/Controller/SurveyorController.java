@@ -90,11 +90,10 @@ public class SurveyorController {
         Questionnaire questionnaire = new Questionnaire();
         Map<String, String[]> formData = request.getParameterMap();
         PrintWriter out = resp.getWriter();
-        for (Map.Entry<String, String[]> entry : formData.entrySet()){
-            if(!(entry.getKey().equals("open_end_question") || entry.getKey().equals("range_question")|| entry.getKey().equals("selection_question"))){
-                out.println("<script language='javascript'>alert('Please add a question! Fill them all and submit again.')</script>");
-            }
+        /*if (formData.entrySet().size()<=1){
+            out.println("<script language='javascript'>alert('Please add a question! Fill them all and submit again.')</script>");
         }
+*/
         for (Map.Entry<String, String[]> entry : formData.entrySet()) {
             if (entry.getKey().equals("survey_name")){
                 for(String name: entry.getValue()){
@@ -167,6 +166,10 @@ public class SurveyorController {
                 }
 
             }
+        }
+        if (questionnaire.getQuestionList().size() <=0){
+            out.println("<script language='javascript'>alert('Please add a question! Fill them all and submit again.')</script>");
+            out.println("<script language='javascript'>window.location.href='/create'</script>");
         }
         User user = this.userRepo.findByUsername(authentication.getName());
         user.addQuestion(questionnaire);
