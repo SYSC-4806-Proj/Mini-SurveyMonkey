@@ -4,7 +4,7 @@
 }
 
 .welcome{
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .welcome h2{
@@ -22,9 +22,10 @@
 }
 
 .container{
-    margin-top: 50px;
+    margin-top: 20px;
     display: grid;
     width: 70%;
+    min-width: 970px;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px 30px;
     grid-auto-rows: minmax(100px, 200px);
@@ -53,7 +54,7 @@
 }
 
 .function[id='f1'] a:hover{
-
+    background-color: #4d7a6d;
 }
 
 .function[id='f2']{
@@ -67,16 +68,32 @@
     padding-left: 20px;
 }
 
-.function[id='f2']a:hover{
-
+.function[id='f2'] a:hover{
+    background-color: #65996c;
 }
 
 .function[id='f3']{
-    background-color: #7ba4bd;
     grid-column: 1/3;
     grid-row: 2;
 }
 
-.function[id='f3'] form:focus{
-    background-color: #93b9ae;
+.function[id='f3'] form{
+    display: block;
+    background-color: #7ba4bd;
+    border-radius: 10px;
+    width: 100%;
+    height: 200px;
+}
+
+.function[id='f3'] label{
+    display: inline-block;
+    margin-top: 10px;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+
+input[type="number"]{
+    -moz-appearance: textfield;
 }
