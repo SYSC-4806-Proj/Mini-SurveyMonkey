@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     public void configure(WebSecurity web) throws Exception{
         web
                 .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**");
+                .antMatchers("/resources/**", "/static/**", "/css/**","https://stackoverflow.com/questions/68347869/make-a-pie-chart-with-tymeleaf-highcharts-spring-mvc-java");
     }
 
     @Override

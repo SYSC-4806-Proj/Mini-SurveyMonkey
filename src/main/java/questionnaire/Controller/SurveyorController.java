@@ -204,6 +204,7 @@ public class SurveyorController {
     @RequestMapping(path = "/result/{id}", method = RequestMethod.GET)
     public String displayQuestion(@PathVariable long id, Model model) {
         Questionnaire questionnaire = this.questionnaireRepo.findById(id);
+
         boolean isEmpty = false;
         if (questionnaire.getQuestionList().isEmpty()) {
             isEmpty = true;
@@ -216,29 +217,29 @@ public class SurveyorController {
     }
 
 
-    @RequestMapping(path = "/result/{id}/answers", method = RequestMethod.GET)
-    public String displayAnswers(@PathVariable long id, Model model) {
-        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
-        List<Question> questions = questionnaire.getQuestionList();
-        List<OpenEnd> openEndsQuestion = new ArrayList<>();
-        List<Range> rangeQuestion = new ArrayList<>();
-        List<Selection> selectionQuestion = new ArrayList<>();
-
-        for (Question question : questions) {
-                if(question instanceof OpenEnd){
-                    openEndsQuestion.add((OpenEnd) question);
-                }else if(question instanceof  Range){
-                    rangeQuestion.add((Range) question);
-                }else if(question instanceof Selection){
-                    selectionQuestion.add((Selection) question);
-                }
-            }
-        model.addAttribute("openEndQuestionList",openEndsQuestion);
-        model.addAttribute("rangeQuestionList",rangeQuestion);
-        model.addAttribute("selectionQuestionList",selectionQuestion);
-
-        return "Question";
-    }
+//    @RequestMapping(path = "/result/{id}", method = RequestMethod.GET)
+//    public String displayAnswers(@PathVariable long id, Model model) {
+//        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
+//        List<Question> questions = questionnaire.getQuestionList();
+//        List<OpenEnd> openEndsQuestion = new ArrayList<>();
+//        List<Range> rangeQuestion = new ArrayList<>();
+//        List<Selection> selectionQuestion = new ArrayList<>();
+//
+//        for (Question question : questions) {
+//                if(question instanceof OpenEnd){
+//                    openEndsQuestion.add((OpenEnd) question);
+//                }else if(question instanceof  Range){
+//                    rangeQuestion.add((Range) question);
+//                }else if(question instanceof Selection){
+//                    selectionQuestion.add((Selection) question);
+//                }
+//            }
+//        model.addAttribute("openEndQuestionList",openEndsQuestion);
+//        model.addAttribute("rangeQuestionList",rangeQuestion);
+//        model.addAttribute("selectionQuestionList",selectionQuestion);
+//
+//        return "Question";
+//    }
 
 
 

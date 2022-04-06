@@ -10,43 +10,37 @@
 
 <canvas id="myChart" height="300" width="300"></canvas>
 <script>
-    var questions = [[${Questionnaire.getQuestionList()}]];
+    var questions = [[${Questionnaire.getQuestionList().toString()}]];
     var barColors = ["red", "green","blue","orange","brown"];
-    for (var i = 0; i < questions; i++) {
-        if (questions[i] instanceof Selection) {
-            var xValues = [questions[i].getOptions()];
-            var yValues = []
-            for (var j = 0; j < questions[i].getOptions(); j++) {
-                yValues[j] = [questions[i].getAnswers()].filter(function (x){
-                    return x === xValues[j]
-                }).length
-            }
-            console.log(xValues)
-            console.log(yValues)
-            new Chart("myChart", {
-                type: "pie",
-                data: {
-                    labels: xValues,
-                    database: [{
-                        backgroundColor: barColors,
-                        data: yValues,
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: "Selection Question"
-                    }
-                }
-            })
-        } else if (questions[i] instanceof Range) {
-
-
-        }
-
-
-
+    var xValues = [[${Questionnaire.getQuestionList()[0].getOptions()}]];
+    // var xValues = ["a","b","c","d"]
+    console.log(xValues)
+    var yValues = []
+    for (var j = 0; j < xValues.length; j++) {
+        yValues[j] = "[[${Questionnaire.getQuestionList()[0].getAnswers()}]]".filter(function (x){
+            return x === xValues[j]
+        }).length
     }
+    console.log(yValues)
+    new Chart("myChart", {
+     type: "pie",
+      data: {
+       labels: xValues,
+         datasets: [{
+          backgroundColor: barColors,
+            data: yValues
+            }]
+          },
+    options: {
+        title: {
+            display: true,
+            text: "Question"
+        }
+    }
+    });
+
+
+
 </script>
 <div th:if="${isEmpty}">
     <h1>You have no question, please go back to the main page!</h1>
