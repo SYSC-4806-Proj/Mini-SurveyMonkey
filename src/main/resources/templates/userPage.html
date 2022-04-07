@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <title>User And Questionnaire</title>
     <link th:href="@{../static/css/base.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{../static/css/table.css}" type="text/css" rel="stylesheet"/>
 </head>
 <body>
     <div class=navbar th:insert="~{navbar::bar}"></div>
 
-    <div th:if="${QNotEmpty}" >
-        <p th:text="${User.getUsername()}"></p>
+    <div class="content" th:if="${QNotEmpty}" >
         <table id="userQuestionnaire">
+            <tr id="title">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
             <tr th:each="Survey : ${User.questionnaire}">
+                <td th:text="${Survey.getId()}"></td>
                 <td th:text="${Survey.name}"></td>
+                <td th:text="${Survey.getQuestionList()[0].getAnswers().size()} + ' Answer(s)'"></td>
                 <td th:if = "not ${Survey.isClosed()}"><form th:action="@{'/display/' + ${Survey.id}}" method="post" path="/display/{id}"><input type=submit value="Close"></form></td>
                 <td th:if = "${Survey.isClosed()}"><a th:href="@{'/result/' + ${Survey.id}}"><input type=button value="Result"></a></td>
-                <td th:text="${Survey.getQuestionList()[0].getAnswers().size()} + ' Answer(s)'"></td>
             </tr>
         </table>
     </div>
@@ -24,16 +31,6 @@
         <p class="errorMsg">You have no questionnaire, <a class="errorMsg" href="/home">click</a> to return home page</p>
     </div>
 </body>
-
-<style>
-    table, th, td, p{
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 20px;
-        padding: 2px;
-        text-align: center;
-    }
-</style>
 
 </html>
 

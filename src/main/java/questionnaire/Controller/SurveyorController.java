@@ -143,7 +143,8 @@ public class SurveyorController {
                        //Range q = new Range(question_content[i], Integer. valueOf(question_content[i+1]),Integer. valueOf(question_content[i+2]));
                       //questionnaire.addQuestion(q);
                    }
-                } else if (entry.getKey().equals("selection_question")) {
+                }
+            else if (entry.getKey().equals("selection_question")) {
                 String[] question_content = entry.getValue().clone();
                 for (int i = 0; i < question_content.length; i = i + 2) {
                     if (question_content[i].equals("") || question_content[i + 1].equals("")) {
