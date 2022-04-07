@@ -90,10 +90,6 @@ public class SurveyorController {
         Questionnaire questionnaire = new Questionnaire();
         Map<String, String[]> formData = request.getParameterMap();
         PrintWriter out = resp.getWriter();
-        /*if (formData.entrySet().size()<=1){
-            out.println("<script language='javascript'>alert('Please add a question! Fill them all and submit again.')</script>");
-        }
-*/
         for (Map.Entry<String, String[]> entry : formData.entrySet()) {
             if (entry.getKey().equals("survey_name")){
                 for(String name: entry.getValue()){
@@ -167,10 +163,6 @@ public class SurveyorController {
 
             }
         }
-        if (questionnaire.getQuestionList().size() <=0){
-            out.println("<script language='javascript'>alert('Please add a question! Fill them all and submit again.')</script>");
-            out.println("<script language='javascript'>window.location.href='/create'</script>");
-        }
         User user = this.userRepo.findByUsername(authentication.getName());
         user.addQuestion(questionnaire);
         this.userRepo.save(user);
@@ -212,27 +204,17 @@ public class SurveyorController {
     @RequestMapping(path = "/result/{id}", method = RequestMethod.GET)
     public String displayQuestion(@PathVariable long id, Model model) {
         Questionnaire questionnaire = this.questionnaireRepo.findById(id);
-        boolean isEmpty = false;
-        if (questionnaire.getQuestionList().isEmpty()) {
-            isEmpty = true;
-        } else {
-            System.out.println("Not Empty");
-            model.addAttribute("Questionnaire", questionnaire);
-        }
-        model.addAttribute("isEmpty", isEmpty);
-        return "Question";
-    }
-
-
-    @RequestMapping(path = "/result/{id}/answers", method = RequestMethod.GET)
-    public String displayAnswers(@PathVariable long id, Model model) {
-        Questionnaire questionnaire = this.questionnaireRepo.findById(id);
         List<Question> questions = questionnaire.getQuestionList();
         List<OpenEnd> openEndsQuestion = new ArrayList<>();
         List<Range> rangeQuestion = new ArrayList<>();
         List<Selection> selectionQuestion = new ArrayList<>();
 
-        for (Question question : questions) {
+        boolean isEmpty = false;
+        if (questionnaire.getQuestionList().isEmpty()) {
+            isEmpty = true;
+        } else {
+            model.addAttribute("Questionnaire", questionnaire);
+            for (Question question : questions) {
                 if(question instanceof OpenEnd){
                     openEndsQuestion.add((OpenEnd) question);
                 }else if(question instanceof  Range){
@@ -241,14 +223,13 @@ public class SurveyorController {
                     selectionQuestion.add((Selection) question);
                 }
             }
-        model.addAttribute("openEndQuestionList",openEndsQuestion);
-        model.addAttribute("rangeQuestionList",rangeQuestion);
-        model.addAttribute("selectionQuestionList",selectionQuestion);
-
+            model.addAttribute("openEndQuestionList",openEndsQuestion);
+            model.addAttribute("rangeQuestionList",rangeQuestion);
+            model.addAttribute("selectionQuestionList",selectionQuestion);
+        }
+        model.addAttribute("isEmpty", isEmpty);
         return "Question";
     }
-
-
 
 
     @GetMapping("allSurvey")
