@@ -15,7 +15,7 @@
 </div>
 <div th:if="${not isEmpty}">
     <h1 th:text="${Questionnaire.id+' : '+Questionnaire.name}"></h1>
-    <ol>
+    <ol class="list">
         <span th:each="question: ${Questionnaire.getQuestionList()}">
             <li><p th:text="${question.question}"></p></li>
             <ul th:if="${openEndQuestionList.contains(question)}">
@@ -26,6 +26,7 @@
 
             <input th:if="${selectionQuestionList.contains(question)}" name="answers_select" th:type="hidden" th:value="${question.getAnswers()}"/>
             <input th:if="${selectionQuestionList.contains(question)}"  name="options" th:type="hidden" th:value="${question.getOptions()}"/>
+
             <div th:if="${selectionQuestionList.contains(question)}" class="box">
                 <canvas height="200" width="200" class="pieChart"></canvas>
             </div>
@@ -113,9 +114,25 @@
     }
 </script>
 </body>
+
 <style>
     .box{
         width: 400px;
     }
+
+    .list {
+        color: #ccc;
+        position: relative;
+        font: bold italic 45px/1.5 Helvetica, Verdana, sans-serif;
+        margin-bottom: 20px;
+        margin-left: 100px;
+        font-weight: bold;
+        font-size: 35px;
+    }
+
+    h1{
+        font-size: 45px;
+    }
+
 </style>
 </html>
