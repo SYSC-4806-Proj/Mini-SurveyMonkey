@@ -34,8 +34,13 @@ public class SurveyorController {
 
 
     @GetMapping("/view/{id}")
-    public String viewQuestionnaire(@PathVariable long id, Model model) {
+    public String viewQuestionnaire(@PathVariable long id, Model model, Authentication authentication) {
+        List<Questionnaire> userSurveys = this.userRepo.findByUsername(authentication.getName()).getQuestionnaire();
         Questionnaire questionnaire = this.questionnaireRepo.findById(id);
+        if (userSurveys.contains(questionnaire)){
+            model.addAttribute("error","Sorry, you cannot do your own survey ID : "+id+". Try other surveys later.");
+            return "errorRedirect";
+        }
         if (questionnaire == null) {
             model.addAttribute("error", "The survey " + id + " does not exist, try another id later.");
             return "errorRedirect";
