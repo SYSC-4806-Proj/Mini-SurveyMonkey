@@ -163,6 +163,10 @@ public class SurveyorController {
 
             }
         }
+        if (questionnaire.getQuestionList().size() <=0){
+            out.println("<script language='javascript'>alert('Please add a question! Fill them all and submit again.')</script>");
+            out.println("<script language='javascript'>window.location.href='/create'</script>");
+        }
         User user = this.userRepo.findByUsername(authentication.getName());
         user.addQuestion(questionnaire);
         this.userRepo.save(user);
