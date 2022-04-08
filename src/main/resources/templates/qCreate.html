@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <link th:href="@{../static/css/base.css}" type="text/css" rel="stylesheet"/>
 <link th:href="@{../static/css/qCreate.css}" type="text/css" rel="stylesheet"/>
 <head>
@@ -82,6 +82,7 @@
 
 </head>
 <body>
+<div class=navbar th:insert="~{navbar::bar}"></div>
 <div id="questionnaire">
     <form method="POST" action="/create">
 
