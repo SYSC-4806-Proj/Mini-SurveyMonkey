@@ -117,37 +117,37 @@ public class SurveyorController {
                         q.setQuestion(question);
                         questionnaire.addQuestion(q);
                     }
-                   // OpenEnd q = new OpenEnd();
+                    // OpenEnd q = new OpenEnd();
                     //q.setQuestion(question);
                     //questionnaire.addQuestion(q);
 
                 }
             }
             else if(entry.getKey().equals("range_question")) {
-                   String[] question_content = entry.getValue().clone();
-                   for (int i = 0; i< question_content.length;i = i+3 ){
-                       if(question_content[i].equals("")||question_content[i+1].equals("")||question_content[i+2].equals("")){
-                           out.println("<script language='javascript'>alert('You still have incomplete question(s). Fill them all and submit again.')</script>");
-                           out.println("<script language='javascript'>window.location.href='/create'</script>");
-                       }
-                       else if ((!((question_content[i+1].matches("^[0-9]+$")) && (question_content[i+2].matches("^[0-9]+$"))))){
-                           out.println("<script language='javascript'>alert('Max boundary or Min boundary should be integer. Fill them all and submit again.')</script>");
-                           out.println("<script language='javascript'>window.location.href='/create'</script>");
+                String[] question_content = entry.getValue().clone();
+                for (int i = 0; i< question_content.length;i = i+3 ){
+                    if(question_content[i].equals("")||question_content[i+1].equals("")||question_content[i+2].equals("")){
+                        out.println("<script language='javascript'>alert('You still have incomplete question(s). Fill them all and submit again.')</script>");
+                        out.println("<script language='javascript'>window.location.href='/create'</script>");
+                    }
+                    else if ((!((question_content[i+1].matches("^[0-9]+$")) && (question_content[i+2].matches("^[0-9]+$"))))){
+                        out.println("<script language='javascript'>alert('Max boundary or Min boundary should be integer. Fill them all and submit again.')</script>");
+                        out.println("<script language='javascript'>window.location.href='/create'</script>");
 
-                       }else if(Integer. valueOf(question_content[i+1])>=Integer. valueOf(question_content[i+2])){
-                           out.println("<script language='javascript'>alert('Max boundary should larger than Min boundary. Fill them all and submit again.')</script>");
-                           out.println("<script language='javascript'>window.location.href='/create'</script>");
-                       }
+                    }else if(Integer. valueOf(question_content[i+1])>=Integer. valueOf(question_content[i+2])){
+                        out.println("<script language='javascript'>alert('Max boundary should larger than Min boundary. Fill them all and submit again.')</script>");
+                        out.println("<script language='javascript'>window.location.href='/create'</script>");
+                    }
 
-                       else{
-                           Range q = new Range(question_content[i], Integer. valueOf(question_content[i+1]),Integer. valueOf(question_content[i+2]));
-                           questionnaire.addQuestion(q);
-                       }
+                    else{
+                        Range q = new Range(question_content[i], Integer. valueOf(question_content[i+1]),Integer. valueOf(question_content[i+2]));
+                        questionnaire.addQuestion(q);
+                    }
 
-                       //Range q = new Range(question_content[i], Integer. valueOf(question_content[i+1]),Integer. valueOf(question_content[i+2]));
-                      //questionnaire.addQuestion(q);
-                   }
-                } else if (entry.getKey().equals("selection_question")) {
+                    //Range q = new Range(question_content[i], Integer. valueOf(question_content[i+1]),Integer. valueOf(question_content[i+2]));
+                    //questionnaire.addQuestion(q);
+                }
+            } else if (entry.getKey().equals("selection_question")) {
                 String[] question_content = entry.getValue().clone();
                 for (int i = 0; i < question_content.length; i = i + 2) {
                     if (question_content[i].equals("") || question_content[i + 1].equals("")) {
@@ -177,7 +177,7 @@ public class SurveyorController {
         //long id = questionnaire.getId();
         //return "redirect:/view/" + id;
         return "createSurvey";
-        }
+    }
 
     @RequestMapping(path="/display", method = RequestMethod.GET)
     public String display(Authentication authentication, Model model){
