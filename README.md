@@ -69,16 +69,11 @@ For Milestone 2, our team developed most of the basic functionalities and featur
 </ul>
 
 ### Milestone 3 (Deadline: April 8th, 2022)
-
-
- <hr>
-
-## Future Plan
- <ul>
- <li>Generate histograms and pie charts for selection and range questions separately.</li>
- <li>Add more CSS styles to HTML files</li>
+<ul>
+ <li>Add consistent CSS to all pages.</li>
  <li>Optimize the HTML redirects</li>
- </ul>
+ <li>Generate histograms and pie charts for selection and range questions separately.</li>
+</ul>
 
  <hr>
 
@@ -109,7 +104,7 @@ ShiZhong Shang
 Jiatong Han
 1. Generate the result: the function need the question's id in advance. [DONE]
 2. Create Result Function: Generate results of the questions' answers from database once the questionnaire is closed. The results are ordered by the question id. [DONE]
-3. Find the API to convert the results of selection questions and range questions to diagram and pie chart separately. [Incomplete]
+3. Find the API to convert the results of selection questions and range questions to diagram and pie chart separately. [DONE]
 
 ## Diagrams
 ### Database Schema Diagram
