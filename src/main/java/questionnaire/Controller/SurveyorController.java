@@ -167,11 +167,13 @@ public class SurveyorController {
             out.println("<script language='javascript'>alert('Please add a question! Fill them all and submit again.')</script>");
             out.println("<script language='javascript'>window.location.href='/create'</script>");
         }
-        User user = this.userRepo.findByUsername(authentication.getName());
-        user.addQuestion(questionnaire);
-        this.userRepo.save(user);
-        //long id = questionnaire.getId();
-        //return "redirect:/view/" + id;
+        else {
+            User user = this.userRepo.findByUsername(authentication.getName());
+            user.addQuestion(questionnaire);
+            this.userRepo.save(user);
+            //long id = questionnaire.getId();
+            //return "redirect:/view/" + id;
+        }
         return "createSurvey";
     }
 
